@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import Layout from "./Layout";
 import Error from "../pages/error";
@@ -6,8 +6,23 @@ import Login from "../pages/login";
 import { useUserState } from "../context/UserContext";
 
 export default function App() {
-  var { isAuthenticated } = useUserState();
+  // var { isAuthenticated } = useUserState();
+  const [isAuthenticated, setIsAuthenticated] = useState((parseInt(localStorage.getItem('isAuthenticated')) ? true : false))
   var { isUserType } = useUserState();
+
+  useEffect(() => {
+    const LoginData = { email: 'adminWHO@gmail.com', password: '12345@' }
+    if (localStorage.getItem('isAuthenticated') === null) {
+      localStorage.setItem('isAuthenticated', 0)
+    } else {
+      if (parseInt(localStorage.getItem('isAuthenticated')) === 1) {
+        localStorage.setItem('isAuthenticated', 1)
+      } else {
+        localStorage.setItem('isAuthenticated', 0)
+      }
+    }
+    localStorage.setItem('LoginData', JSON.stringify(LoginData));
+  }, [])
 
   if (isUserType == 0) {
     return (

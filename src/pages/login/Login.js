@@ -17,8 +17,25 @@ function Login(props) {
   var userDispatch = useUserDispatch();
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
-  var [loginValue, setLoginValue] = useState("admin1@gmail.com");
-  var [passwordValue, setPasswordValue] = useState("12345");
+  var [loginValue, setLoginValue] = useState("");
+  var [passwordValue, setPasswordValue] = useState("");
+
+  const authenticateUser = () => {
+    setIsLoading(true)
+    const users = JSON.parse(localStorage.getItem("LoginData"));
+    if (users.email === loginValue && users.password === passwordValue) {
+      localStorage.setItem('isAuthenticated', 1)
+      setTimeout(() => {
+        window.location.reload();
+        setIsLoading(false)
+      }, 1000);
+    } else {
+      alert('Incorrect email or password please try again')
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
+    }
+  }
 
   return (
     <Grid container className={classes.container}>
@@ -72,14 +89,15 @@ function Login(props) {
                     loginValue.length === 0 || passwordValue.length === 0
                   }
                   onClick={() =>
-                    loginUser(
-                      userDispatch,
-                      loginValue,
-                      passwordValue,
-                      props.history,
-                      setIsLoading,
-                      setError,
-                    )
+                    // loginUser(
+                    //   userDispatch,
+                    //   loginValue,
+                    //   passwordValue,
+                    //   props.history,
+                    //   setIsLoading,
+                    //   setError,
+                    // )
+                    authenticateUser()
                   }
                   variant="contained"
                   color="primary"
