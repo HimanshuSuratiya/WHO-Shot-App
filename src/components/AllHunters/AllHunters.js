@@ -5,7 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ReactPaginate from "react-paginate";
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import axios from 'axios';
-import { URL } from "../../../url/url";
+import { URL } from "../../url/url";
 import { toast } from 'react-toastify';
 
 const AllHunters = () => {

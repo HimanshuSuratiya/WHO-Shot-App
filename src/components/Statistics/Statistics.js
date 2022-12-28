@@ -5,7 +5,7 @@ import Pagination from '@mui/material/Pagination'
 import { Link } from "react-router-dom";
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import ReactPaginate from 'react-paginate'
-import { URL } from "../../../url/url";
+import { URL } from "../../url/url";
 import axios from "axios";
 import { toast } from 'react-toastify';
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DeleteForever from "@material-ui/icons/DeleteForever";
 import { Link } from "react-router-dom";
-import BootstrapDialog from "./BootstrapDialog";
+import BootstrapDialog from "../BootstrapDialog/BootstrapDialog";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import "reactjs-popup/dist/index.css";
-import EditLocation from "./EditLocation";
+import EditLocation from "../EditLocation/EditLocation";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { useParams } from "react-router-dom";

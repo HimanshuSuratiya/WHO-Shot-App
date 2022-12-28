@@ -6,30 +6,30 @@ import '../../vishal.css'
 import useStyles from "./styles";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
-import Dashboard from "../Admin/Dashboard/Dashboard";
-import AllHunters from "../Admin/Manage Admin/AllHunters";
-import Statistics from "../Admin/Manage Merchants/Statistics";
+import Dashboard from "../Dashboard/Dashboard";
+import AllHunters from "../AllHunters/AllHunters";
+import Statistics from "../Statistics/Statistics";
 import NotificationDetails from "../Admin/notificatonDetails";
 import EditParking from "../Admin/Manage Admin/EditParking";
 import Maps from "../../pages/maps";
 import Charts from "../../pages/charts";
 import AddAdmin from "../Admin/AddAdmin";
-import Settings from "../Admin/Settings/Settings";
-import CreateTermsandservices from "../Admin/Terms and Services/CreateTermsandservices";
-import CreatePrivacypolicy from "../Admin/Privacy Policy/CreatePrivacypolicy";
-import PrivacyPolicy from "../Admin/Privacy Policy/PrivacyPolicy";
+import Settings from "../Settings/Settings";
+import CreateTermsandservices from "../Terms and Services/CreateTermsandservices";
+import CreatePrivacypolicy from "../Privacy Policy/CreatePrivacypolicy";
+import PrivacyPolicy from "../Privacy Policy/PrivacyPolicy";
 import { useLayoutState } from "../../context/LayoutContext";
 import CustomersDetails from '../Admin/CustomersDetails'
-import ContactDetails from "../Admin/Contactus/ContactDetails";
+import ContactDetails from "../Contactus/ContactDetails";
 import AllNotification from "../Admin/Notifications/AllNotification";
-import BasicReports from "../Admin/BasicReports";
+import BasicReports from "../BasicReports/BasicReports";
 import Payments from "../Admin/Payments";
-import ManageHunts from "../Admin/ManageHunts";
+import ManageHunts from "../ManageHunts/ManageHunts";
 import CustomersParkingDetails from "../Admin/CustomersParkingDetails";
-import AboutPage from "../Admin/AboutPage";
+import AboutPage from "../About/AboutPage";
 import '../../vishal.css'
-import DetailsOfGroup from "../Admin/DetailsOfGroup";
-import ManageGroups from "../Admin/ManageGroups";
+import DetailsOfGroup from "../DetailsofGroup/DetailsOfGroup";
+import ManageGroups from "../ManageGroup/ManageGroups";
 
 function Layout(props) {
   var classes = useStyles();
