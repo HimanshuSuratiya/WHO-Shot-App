@@ -84,6 +84,15 @@ const DetailsGroup = () => {
   };
   //customer Delete
 
+  const data = [
+    { status: 0, id: '1', groupName: 'Group-1', noOfShots: '125', noOfPlayer: '5', won: '5', loss: '2', noOfTransaction: '2', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
+    { status: 1, id: '2', groupName: 'Group-2', noOfShots: '254', noOfPlayer: '12', won: '7', loss: '5', noOfTransaction: '8', createdOnDate: '04/12/2022', endDate: '14/12/2022' },
+    { status: 1, id: '3', groupName: 'Group-3', noOfShots: '45', noOfPlayer: '17', won: '3', loss: '2', noOfTransaction: '4', createdOnDate: '02/11/2022', endDate: '10/11/2022' },
+    { status: 0, id: '4', groupName: 'Group-4', noOfShots: '27', noOfPlayer: '3', won: '15', loss: '0', noOfTransaction: '2', createdOnDate: '02/10/2022', endDate: '04/10/2022' },
+    { status: 1, id: '5', groupName: 'Group-5', noOfShots: '256', noOfPlayer: '7', won: '0', loss: '0', noOfTransaction: '0', createdOnDate: '02/11/2021', endDate: '02/11/2022' },
+    { status: 0, id: '6', groupName: 'Group-6', noOfShots: '0', noOfPlayer: '4', won: '6', loss: '2', noOfTransaction: '7', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
+  ]
+
   return (
     <>
       <div className="page-wrapper" style={{ minHeight: "250px" }}>
@@ -134,7 +143,34 @@ const DetailsGroup = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {custmerData
+                      {data.map((Item) => {
+                        return (
+                          <tr>
+                            <td>{Item.id}</td>
+                            <td>{Item.groupName}</td>
+                            <td>{Item.noOfPlayer}</td>
+                            <td>{Item.createdOnDate}</td>
+                            <td>{Item.won}</td>
+                            <td>{Item.loss}</td>
+                            <td><span>View</span></td>
+                            <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                            <td>
+                              <BootstrapSwitchButton
+                                onlabel="Active"
+                                checked={Item.status == 0 ? true : false}
+                                width={100}
+                                offlabel="Inactive"
+                                onstyle="success"
+                                onChange={(checked) => {
+                                  handleStatus(Item.status, Item.id);
+                                  setStatus(checked);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        )
+                      })}
+                      {/* {custmerData
                         .filter(
                           (row) =>
                             !search.length ||
@@ -184,7 +220,7 @@ const DetailsGroup = () => {
                               />
                             </td>
                           </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                   </table>
                   <div

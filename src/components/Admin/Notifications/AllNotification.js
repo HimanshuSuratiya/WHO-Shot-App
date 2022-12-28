@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import NotificationList from '../../Admin/NotificationList'
 import axios from "axios";
 import { URL } from "../../../url/url";
+import DeleteForever from '@material-ui/icons/DeleteForever';
 import moment from "moment";
 import { toast } from 'react-toastify';
 
@@ -66,6 +67,15 @@ const AllNotification = () => {
   };
   //notification Delete
 
+  const notificationdData = [
+    { status: 0, id: '1', customerName: 'Himanshu Suratiya', title: 'Title-1', message: 'message-1', date: '02/11/2022', endDate: '04/11/2022' },
+    { status: 1, id: '2', customerName: 'Atul', title: 'Title-2', message: 'message-2', date: '04/12/2022', endDate: '14/12/2022' },
+    { status: 1, id: '3', customerName: 'Shivam', title: 'Title-3', message: 'message-3', date: '02/11/2022', endDate: '10/11/2022' },
+    { status: 0, id: '4', customerName: 'Surabh Shukla', title: 'Title-4', message: 'message-4', date: '02/10/2022', endDate: '04/10/2022' },
+    { status: 1, id: '5', customerName: 'Jain Jorden', title: 'Title-5', message: 'message-5', date: '02/11/2021', endDate: '02/11/2022' },
+    { status: 0, id: '6', customerName: 'Varun Kashyap', title: 'Title-6', message: 'message-6', date: '02/11/2022', endDate: '04/11/2022' },
+  ]
+
   return (
     <div className="page-wrapper" >
       <div className="container-fluid">
@@ -95,7 +105,19 @@ const AllNotification = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {
+                    {notificationdData.map((Item) => {
+                      return (
+                        <tr>
+                          <td>{Item.id}</td>
+                          <td>{Item.customerName}</td>
+                          <td>{Item.title}</td>
+                          <td>{Item.message}</td>
+                          <td>{Item.date}</td>
+                          <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                        </tr>
+                      )
+                    })}
+                    {/* {
                       data.filter(
                         (row) =>
                           !search.length ||
@@ -108,7 +130,7 @@ const AllNotification = () => {
                           <tr>
                             <td>{i + pagesVisited + 1}</td>
                             <td>
-                              {/* {item.user_id === 0 ? 'All' : item.first_name} */}
+                              {item.user_id === 0 ? 'All' : item.first_name}
                               {item.customerName === 'All' ? item.customerName : item.customerName[0].first_name + ' ' + item.customerName[0].last_name}
                             </td>
                             <td>{item.title.substr(0, 25) + ".."}</td>
@@ -133,7 +155,7 @@ const AllNotification = () => {
                               </Link>
                             </td>
                           </tr>
-                        ))}
+                        ))} */}
                   </tbody>
                 </table>
                 <div style={{ display: data.length > 5 ? "block" : "none" }}>

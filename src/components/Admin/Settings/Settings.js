@@ -243,14 +243,7 @@ const Settings = () => {
                           <div className="user-photo-main-area">
                             <div className="user-img-area">
                               <img
-                                ref={uploadedImage}
-                                src={
-                                  data.image === '' ?
-                                    process.env.PUBLIC_URL +
-                                    "/assets/images/user-img.jpg" : `${URL}/uploads/${data.image}`
-                                }
-                                alt="user img"
-                              />
+                                src={process.env.PUBLIC_URL + "/assets/images/user-img.jpg"} alt="user-img" className="img-circle" />
                             </div>
                             <div className="change-photo-btn-area">
                               {/* <a href="#" className="change-poto-btn">

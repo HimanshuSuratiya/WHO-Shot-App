@@ -84,6 +84,15 @@ const ManageGroup = () => {
   };
   //customer Delete
 
+  const data = [
+    { status: 0, id: '1', groupName: 'Group-1', noOfMember: '5', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
+    { status: 1, id: '2', groupName: 'Group-2', noOfMember: '12', createdOnDate: '04/12/2022', endDate: '14/12/2022' },
+    { status: 1, id: '3', groupName: 'Group-3', noOfMember: '17', createdOnDate: '02/11/2022', endDate: '10/11/2022' },
+    { status: 0, id: '4', groupName: 'Group-4', noOfMember: '3', createdOnDate: '02/10/2022', endDate: '04/10/2022' },
+    { status: 1, id: '5', groupName: 'Group-5', noOfMember: '7', createdOnDate: '02/11/2021', endDate: '02/11/2022' },
+    { status: 0, id: '6', groupName: 'Group-6', noOfMember: '4', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
+  ]
+
   return (
     <>
       <div className="page-wrapper" style={{ minHeight: "250px" }}>
@@ -132,7 +141,32 @@ const ManageGroup = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {custmerData
+                      {data.map((Item) => {
+                        return (
+                          <tr>
+                            <td>{Item.id}</td>
+                            <td>{Item.groupName}</td>
+                            <td>{Item.createdOnDate}</td>
+                            <td>{Item.noOfMember}</td>
+                            <td><span>View</span></td>
+                            <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                            <td>
+                              <BootstrapSwitchButton
+                                onlabel="Active"
+                                checked={Item.status == 0 ? true : false}
+                                width={100}
+                                offlabel="Inactive"
+                                onstyle="success"
+                                onChange={(checked) => {
+                                  handleStatus(Item.status, Item.id);
+                                  setStatus(checked);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        )
+                      })}
+                      {/* {custmerData
                         .filter(
                           (row) =>
                             !search.length ||
@@ -182,7 +216,7 @@ const ManageGroup = () => {
                               />
                             </td>
                           </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                   </table>
                   <div

@@ -84,6 +84,15 @@ const ManageMerchants = () => {
   };
   //customer Delete
 
+  const data = [
+    { status: 0, id: '1', activityName: 'Himanshu Suratiya', profile: 'its_himanshu_0007', noOfActivities: '125', noOfParticipation: '5', noOfTransaction: '2' },
+    { status: 1, id: '2', activityName: 'Vishal Singh', profile: 'vishal09862', noOfActivities: '254', noOfParticipation: '12', noOfTransaction: '8' },
+    { status: 1, id: '3', activityName: 'Sourabh Shukla', profile: '123_Sourabh', noOfActivities: '45', noOfParticipation: '17', noOfTransaction: '4' },
+    { status: 0, id: '4', activityName: 'Shivam Suratiya', profile: 'Shivam_007', noOfActivities: '27', noOfParticipation: '3', noOfTransaction: '2' },
+    { status: 1, id: '5', activityName: 'Pintu Kashyap', profile: 'Pintu_@#45', noOfActivities: '256', noOfParticipation: '7', noOfTransaction: '0' },
+    { status: 0, id: '6', activityName: 'Virender Kumar', profile: 'Kumar123&', noOfActivities: '0', noOfParticipation: '4', noOfTransaction: '7' },
+  ]
+
   return (
     <>
       <div className="page-wrapper" style={{ minHeight: "250px" }}>
@@ -133,7 +142,33 @@ const ManageMerchants = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {custmerData
+                      {data.map((Item) => {
+                        return (
+                          <tr>
+                            <td>{Item.id}</td>
+                            <td>{Item.activityName}</td>
+                            <td>{Item.noOfParticipation}</td>
+                            <td>{Item.noOfActivities}</td>
+                            <td>{Item.noOfTransaction}</td>
+                            <td><span>View</span></td>
+                            <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                            <td>
+                              <BootstrapSwitchButton
+                                onlabel="Active"
+                                checked={Item.status == 0 ? true : false}
+                                width={100}
+                                offlabel="Inactive"
+                                onstyle="success"
+                                onChange={(checked) => {
+                                  handleStatus(Item.status, Item.id);
+                                  setStatus(checked);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        )
+                      })}
+                      {/* {custmerData
                         .filter(
                           (row) =>
                             !search.length ||
@@ -183,7 +218,7 @@ const ManageMerchants = () => {
                               />
                             </td>
                           </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                   </table>
                   <div

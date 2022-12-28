@@ -99,6 +99,15 @@ const ManageLocation = ({ label }) => {
   };
   //Handle Status
 
+  const data = [
+    { status: 1, id: '1', name: 'Himanshu Suratiya', totalParticipants: '180', createDate: '02/11/2022', endDate: '04/11/2022' },
+    { status: 0, id: '2', name: 'Vishal Singh', totalParticipants: '152', createDate: '04/12/2022', endDate: '14/12/2022' },
+    { status: 1, id: '3', name: 'Sourabh Shukla', totalParticipants: '48', createDate: '02/11/2022', endDate: '10/11/2022' },
+    { status: 0, id: '4', name: 'Shivam Suratiya', totalParticipants: '129', createDate: '02/10/2022', endDate: '04/10/2022' },
+    { status: 1, id: '5', name: 'Pintu Kashyap', totalParticipants: '256', createDate: '02/11/2021', endDate: '02/11/2022' },
+    { status: 0, id: '6', name: 'Virender Kumar', totalParticipants: '12', createDate: '02/11/2022', endDate: '04/11/2022' },
+  ]
+
   return (
     <>
       <div className="container-fluid ">
@@ -151,26 +160,41 @@ const ManageLocation = ({ label }) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>vishal</td>
-                  <td>233</td>
-                  <td>25/Nov/2022</td>
-                  <td>5/Dec/2022</td>
-                  <td>   <Link
-                    to={`/app/managelocation`}
-                    className="mange-admins-dlt-btn"
-                  >
-                    View
-                    <DeleteForever
-                      onClick={() => {
-                        Abc("Manish");
-                      }}
-                      style={{ color: "#FF5C93" }}
-                    />
-                  </Link> </td>
-                  <td> yes/ no</td>
-                </tr>
+                {data.map((Item) => {
+                  return (
+                    <tr>
+                      <td>{Item.id}</td>
+                      <td>{Item.name}</td>
+                      <td>{Item.totalParticipants}</td>
+                      <td>{Item.createDate}</td>
+                      <td>{Item.endDate}</td>
+                      <td>
+                        <Link to={`/app/managelocation`} className="mange-admins-dlt-btn" >
+                          <span>View</span>
+                          <DeleteForever
+                            onClick={() => {
+                              Abc("Manish");
+                            }}
+                            style={{ color: "#FF5C93" }}
+                          />
+                        </Link>
+                      </td>
+                      <td>
+                        <BootstrapSwitchButton
+                          onlabel="Active"
+                          checked={Item.status == 0 ? true : false}
+                          width={100}
+                          offlabel="Inactive"
+                          onstyle="success"
+                          onChange={(checked) => {
+                            handleStatus(Item.status, Item.id);
+                            setStatus(checked);
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  )
+                })}
                 {/* {dataName
                   .filter(
                     (row) =>

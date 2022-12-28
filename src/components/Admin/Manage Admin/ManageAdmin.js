@@ -25,6 +25,7 @@ const ManageAdmin = () => {
       console.log("err")
     })
   }
+
   useEffect(() => {
     getData();
   }, [])
@@ -80,7 +81,15 @@ const ManageAdmin = () => {
         console.log(err);
       });
   };
-  //Handle Status
+
+  const data = [
+    { id: '1', name: 'Himanshu Suratiya', profile: 'its_himanshu_0007', joinDate: '02/11/2022', recentActiveDate: '04/11/2022', totalHunts: '125' },
+    { id: '2', name: 'Vishal Singh', profile: 'vishal09862', joinDate: '04/12/2022', recentActiveDate: '14/12/2022', totalHunts: '254' },
+    { id: '3', name: 'Sourabh Shukla', profile: '123_Sourabh', joinDate: '02/11/2022', recentActiveDate: '10/11/2022', totalHunts: '45' },
+    { id: '4', name: 'Shivam Suratiya', profile: 'Shivam_007', joinDate: '02/10/2022', recentActiveDate: '04/10/2022', totalHunts: '27' },
+    { id: '5', name: 'Pintu Kashyap', profile: 'Pintu_@#45', joinDate: '02/11/2021', recentActiveDate: '02/11/2022', totalHunts: '256' },
+    { id: '6', name: 'Virender Kumar', profile: 'Kumar123&', joinDate: '02/11/2022', recentActiveDate: '04/11/2022', totalHunts: '0' },
+  ]
 
   return (
     <>
@@ -130,7 +139,20 @@ const ManageAdmin = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {datas
+                      {data.map((Item) => {
+                        return (
+                          <tr>
+                            <td>{Item.id}</td>
+                            <td>{Item.profile}</td>
+                            <td>{Item.name}</td>
+                            <td>{Item.totalHunts}</td>
+                            <td>{Item.joinDate}</td>
+                            <td>{Item.recentActiveDate}</td>
+                            <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                          </tr>
+                        )
+                      })}
+                      {/* {datas
                         .filter(
                           (row) =>
                             !search.length ||
@@ -184,7 +206,7 @@ const ManageAdmin = () => {
                               />
                             </td>
                           </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                   </table>
                   <div

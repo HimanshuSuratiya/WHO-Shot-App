@@ -3,12 +3,14 @@ import DeleteForever from '@material-ui/icons/DeleteForever';
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { URL } from "../../url/url";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import axios from 'axios';
 
 const Bookings = () => {
     const [age, setAge] = React.useState('');
     const [dataName, setDataName] = useState([])
     const [pageNumber, setPageNumber] = useState(0);
+    const [status, setStatus] = useState(0)
     const [search, setSearch] = useState("");
     const usersPerPage = 5;
     const pagesVisited = pageNumber * usersPerPage;
@@ -33,6 +35,39 @@ const Bookings = () => {
     const changePage = ({ selected }) => {
         setPageNumber(selected);
     };
+
+    //Handle Status
+    const handleStatus = async (status, usersID) => {
+        var getStatus = "";
+        if (status === 0) {
+            getStatus = 1;
+        } else {
+            getStatus = 0;
+        }
+        const request = {
+            id: usersID,
+            status: getStatus,
+        };
+
+        await axios
+            .post(URL + "/updateLocationStatus", request)
+            .then((res) => {
+                getData()
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    //Handle Status
+
+    const data = [
+        { status: 0, id: '1', groupName: 'Group-1', noOfShots: '125', noOfRegistration: '5', noOfTransaction: '2', startDate: '02/11/2022', },
+        { status: 1, id: '2', groupName: 'Group-2', noOfShots: '254', noOfRegistration: '12', noOfTransaction: '8', startDate: '04/12/2022', },
+        { status: 1, id: '3', groupName: 'Group-3', noOfShots: '45', noOfRegistration: '17', noOfTransaction: '4', startDate: '02/11/2022', },
+        { status: 0, id: '4', groupName: 'Group-4', noOfShots: '27', noOfRegistration: '3', noOfTransaction: '2', startDate: '02/10/2022', },
+        { status: 1, id: '5', groupName: 'Group-5', noOfShots: '256', noOfRegistration: '7', noOfTransaction: '0', startDate: '02/11/2021', },
+        { status: 0, id: '6', groupName: 'Group-6', noOfShots: '0', noOfRegistration: '4', noOfTransaction: '7', startDate: '02/11/2022', },
+    ]
 
     return (
         <>
@@ -72,7 +107,33 @@ const Bookings = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
+                                {data.map((Item) => {
+                                    return (
+                                        <tr>
+                                            <td>{Item.id}</td>
+                                            <td>{Item.groupName}</td>
+                                            <td>{Item.noOfRegistration}</td>
+                                            <td>{Item.noOfShots}</td>
+                                            <td>{Item.startDate}</td>
+                                            <td>{Item.endDate}</td>
+                                            <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                                            <td>
+                                                <BootstrapSwitchButton
+                                                    onlabel="Active"
+                                                    checked={Item.status == 0 ? true : false}
+                                                    width={100}
+                                                    offlabel="Inactive"
+                                                    onstyle="success"
+                                                    onChange={(checked) => {
+                                                        handleStatus(Item.status, Item.id);
+                                                        setStatus(checked);
+                                                    }}
+                                                />
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                                {/* {
                                     dataName.filter(
                                         (row) =>
                                             !search.length ||
@@ -97,7 +158,7 @@ const Bookings = () => {
                                                 </td>
                                             </tr>
                                         ))
-                                }
+                                } */}
                             </tbody>
                         </table>
                         <div style={{ display: dataName.length > 5 ? "block" : "none" }}>
