@@ -18,11 +18,7 @@ import {
 import { useTheme } from "@material-ui/styles";
 import classnames from "classnames";
 import tinycolor from "tinycolor2";
-
-// styles
 import useStyles from "./styles";
-
-// components
 import { Typography } from "../Wrappers";
 
 const typesIcons = {
@@ -111,7 +107,6 @@ export default function Notification({ variant, ...props }) {
   );
 }
 
-// ####################################################################
 function getIconByType(type = "offer") {
   return typesIcons[type];
 }

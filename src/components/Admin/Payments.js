@@ -9,20 +9,20 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { DateRangePicker } from 'rsuite';
 import "react-datepicker/dist/react-datepicker.css";
 
-
 const Payments = () => {
     const [age, setAge] = React.useState('');
     const handleChange = (event) => {
         setAge(event.target.value);
     };
+
     const data = [
         { id: '1', add: 'Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522 (257) 563-7401', cap: '100', ic1: <i className="fas fa-edit"></i>, ic2: <DeleteForever style={{ color: '#FF5C93' }} /> },
         { id: '2', add: 'Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522 (257) 563-7401', cap: '100', ic1: <i className="fas fa-edit"></i>, ic2: <DeleteForever style={{ color: '#FF5C93' }} /> },
         { id: '3', add: 'Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522 (257) 563-7401', cap: '100', ic1: <i className="fas fa-edit"></i>, ic2: <DeleteForever style={{ color: '#FF5C93' }} /> },
         { id: '4', add: 'Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522 (257) 563-7401', cap: '100', ic1: <i className="fas fa-edit"></i>, ic2: <DeleteForever style={{ color: '#FF5C93' }} /> },
         { id: '5', add: 'Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522 (257) 563-7401', cap: '100', ic1: <i className="fas fa-edit"></i>, ic2: <DeleteForever style={{ color: '#FF5C93' }} /> },
-
     ]
+
     return (
         <>
             <div className="container-fluid ">
@@ -47,15 +47,12 @@ const Payments = () => {
                                         label="Age"
                                         onChange={handleChange}
                                     >
-
                                         <MenuItem value={10}>Booking ID</MenuItem>
                                         <MenuItem value={20}>Cust Name</MenuItem>
                                         <MenuItem value={30}>Date</MenuItem>
                                     </Select>
                                 </FormControl>
-
                             </div>
-
                             <div className="col-md-2">
                                 <button class="head-button">Export</button>
                             </div>
@@ -67,7 +64,6 @@ const Payments = () => {
                                 <tr>
                                     <th scope="col">Sr No.</th>
                                     <th scope="col">Booking ID</th>
-
                                     <th scope="col">Customer Name</th>
                                     <th scope="col">Payments</th>
                                     <th scope="col">Date</th>
@@ -86,8 +82,9 @@ const Payments = () => {
                                             <td>22/12/2032</td>
                                             <td>09:04 pm</td>
                                             <td>
-                                                <Link className="mange-admins-dlt-btn">                       <DeleteForever style={{ color: '#FF5C93' }} />
-                                                </Link></td>
+                                                <Link className="mange-admins-dlt-btn"><DeleteForever style={{ color: '#FF5C93' }} />
+                                                </Link>
+                                            </td>
                                         </tr>
                                     ))
                                 }

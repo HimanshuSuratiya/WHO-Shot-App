@@ -3,8 +3,7 @@ import Axios from "axios";
 import { URL } from "../../../url/url";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {toast} from 'react-toastify';
-
+import { toast } from 'react-toastify';
 
 const CreateTermsandservices = () => {
   const [heading, setHeading] = useState([])
@@ -12,49 +11,42 @@ const CreateTermsandservices = () => {
   const [data, getData] = useState([])
 
   const createTerms = () => {
-    // console.log(heading,"description")
-    // console.log(description,"++++++")
-    
-    let postdata= {heading,description}
-    
-    fetch("http://localhost:8000/termsConditions",{
-      method:"POST",
-      headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
+    let postdata = { heading, description }
+
+    fetch("http://localhost:8000/termsConditions", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body:JSON.stringify({heading,description})
-    }).then((result)=>{
-      result.json().then((data)=>{
+      body: JSON.stringify({ heading, description })
+    }).then((result) => {
+      result.json().then((data) => {
         toast.success("Success")
-        //console.log(data);
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log(err)
       })
     })
-
   };
 
   useEffect(() => {
     getData1();
-    
   }, []);
-  
+
   const getData1 = async () => {
     await Axios.get('http://localhost:8000/getTerms').then(res => {
-    //console.log(res.data.message[0])
-     getData(res.data.data[0]);
-     setHeading(res.data.data[0].heading);
-     setDescriptions(res.data.data[0].description)     
+      getData(res.data.data[0]);
+      setHeading(res.data.data[0].heading);
+      setDescriptions(res.data.data[0].description)
     }).catch(err => {
       console.log(err)
-      console.log("err")
     })
   }
 
-  const editdescription = (e)=>{
+  const editdescription = (e) => {
     setDescriptions(e.target.value)
   }
+
   return (
     <>
       <div className="page-wrapper" style={{ minHeight: "250px" }}>
@@ -75,10 +67,8 @@ const CreateTermsandservices = () => {
                   <div className="form-group">
                     <label>Description</label>
                     <CKEditor
-                    
                       editor={ClassicEditor}
                       data={data.description}
-                      
                       onReady={editor => {
                         console.log('Editor is ready to use!', editor);
                       }}
@@ -86,18 +76,14 @@ const CreateTermsandservices = () => {
                       onChange={(event, editor) => {
                         const data = editor.getData();
                         setDescriptions(data);
-                        
                         // console.log({ event, editor, data });
                       }}
-                     
                       onBlur={(event, editor) => {
                         console.log('Blur.', editor);
                       }}
                       onFocus={(event, editor) => {
                         console.log('Focus.', editor);
                       }}
-                      
-                      
                     />
                   </div>
                   <div className="contact-form-submint-btn-area">
@@ -108,10 +94,9 @@ const CreateTermsandservices = () => {
             </div>
           </div>
         </div>
-
-        <footer className="footer text-center"> 2022 © Admin Panel brought to you by <a
-                    href="https://https://www.webnmobappssolutions.com">webnmobappssolutions.com</a>
-                </footer>
+        <footer className="footer text-center"> 2022 © Admin Panel brought to you by
+          <a href="https://https://www.webnmobappssolutions.com">webnmobappssolutions.com </a>
+        </footer>
       </div>
     </>
   );

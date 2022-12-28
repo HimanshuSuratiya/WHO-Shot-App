@@ -4,36 +4,24 @@ import {
   Home as HomeIcon,
   NotificationsNone as NotificationsIcon,
   ArrowBack as ArrowBackIcon,
-  SupervisorAccount,
   VpnKey,
   Security,
   ContactSupport,
-  Payment,
   Settings,
-
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
-import PersonPinCircleIcon from '@mui/icons-material/PersonPinCircle';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ReportIcon from '@mui/icons-material/Report';
 import ArticleIcon from '@mui/icons-material/Article';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import GroupsIcon from '@mui/icons-material/Groups';
 import DetailsIcon from '@mui/icons-material/Details';
-// styles
 import useStyles from "./styles";
 import PeopleIcon from '@mui/icons-material/People';
-// components
 import SidebarLink from "./components/SidebarLink/SidebarLink";
-// context
-import {
-  useLayoutState,
-  useLayoutDispatch,
-  toggleSidebar,
-} from "../../context/LayoutContext";
+import { useLayoutState, useLayoutDispatch, toggleSidebar } from "../../context/LayoutContext";
 
 const structure = [
   {
@@ -48,7 +36,6 @@ const structure = [
     link: "/app/managelocation",
     icon: <Diversity3Icon />,
   },
-
   {
     id: 5,
     label: "All Hunters ",
@@ -71,15 +58,14 @@ const structure = [
     id: 31,
     label: "Detail Of Groups ",
     link: "/app/detailsgroup",
-    icon: < DetailsIcon/>
+    icon: < DetailsIcon />
   },
-  { 
+  {
     id: 32,
     label: "Manage Groups ",
     link: "/app/managegroups",
     icon: <GroupsIcon />
   },
-
   {
     id: 292,
     label: "Setting",
@@ -146,12 +132,8 @@ const structure = [
 function Sidebar({ location }) {
   var classes = useStyles();
   var theme = useTheme();
-
-  // global
   var { isSidebarOpened } = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
-
-  // local
   var [isPermanent, setPermanent] = useState(true);
 
   useEffect(function () {
@@ -200,12 +182,10 @@ function Sidebar({ location }) {
     </Drawer>
   );
 
-  // ##################################################################
   function handleWindowWidthChange() {
     var windowWidth = window.innerWidth;
     var breakpointWidth = theme.breakpoints.values.md;
     var isSmallScreen = windowWidth < breakpointWidth;
-
     if (isSmallScreen && isPermanent) {
       setPermanent(false);
     } else if (!isSmallScreen && !isPermanent) {

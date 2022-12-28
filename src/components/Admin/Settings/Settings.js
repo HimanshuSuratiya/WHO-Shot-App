@@ -3,7 +3,6 @@ import axios from "axios";
 import { URL } from "../../../url/url";
 import { toast } from "react-toastify";
 
-
 const Settings = () => {
   const [type, setType] = useState(1);
   const [name, setName] = useState("")
@@ -13,6 +12,12 @@ const Settings = () => {
   const [postal, setPostal] = useState("")
   const [gender, setGender] = useState("")
   const [data, setData] = useState("")
+  const [password, setPassword] = useState("");
+  const [newpassword, setNewpassword] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
+  const uploadedImage = React.useRef(null);
+  const imageUploader = React.useRef(null);
+  const [image, setImage] = useState('')
 
   //formValidation
   const [nameError, setNameError] = useState("");
@@ -37,119 +42,95 @@ const Settings = () => {
     phone != "" &&
     address != "" &&
     postal != "";
-
-
-
-
-
   //formValidation
 
   useEffect(() => {
     getsettingsdata()
   }, [])
 
-    const getsettingsdata = ()=>{
-      axios.get(URL + '/getprofileofadmin',{
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }).then(
-        (res)=>{
-          setData(res.data.data[0])
-          setName(res.data.data[0]["first_name"]);
-          setEmail(res.data.data[0]["email"]);
-          setPhone(res.data.data[0]["phone"]);
-          setPostal(res.data.data[0]["pincode"]);
-          setAddress(res.data.data[0]["address"]);
-          setGender(res.data.data[0]["gender"]);
-        }
-      ).catch(
-        (err)=>{
-          console.log(err)
-        }
-      )
+  const getsettingsdata = () => {
+    axios.get(URL + '/getprofileofadmin', {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    }).then(
+      (res) => {
+        setData(res.data.data[0])
+        setName(res.data.data[0]["first_name"]);
+        setEmail(res.data.data[0]["email"]);
+        setPhone(res.data.data[0]["phone"]);
+        setPostal(res.data.data[0]["pincode"]);
+        setAddress(res.data.data[0]["address"]);
+        setGender(res.data.data[0]["gender"]);
+      }
+    ).catch(
+      (err) => {
+        console.log(err)
+      }
+    )
+  }
+
+  const submitform = async () => {
+    const formData = new FormData()
+    formData.append('id', 1)
+    formData.append('first_name', name)
+    formData.append('email', email)
+    formData.append('phone', phone)
+    formData.append('address', address)
+    formData.append('pincode', postal)
+    formData.append('gender', gender)
+    formData.append('image', image)
+
+    let res = await axios
+      .post(URL + "/updateAdmin", formData)
+      .then(() => {
+        toast.success("Data Updated Successfully")
+      })
+      .catch((err) => {
+        toast.error("error")
+      });
+    getsettingsdata()
+  };
+
+  const ChangePassword = async () => {
+    if (password == "") {
+      toast.warn("Please Enter old Password");
+    } else if (newpassword == "") {
+      toast.warn("Please enter New Password");
     }
+    // If confirm password not entered
+    else if (confirmpassword == "") {
+      toast.warn("Please enter confirm password");
+    }
+    // If Not same return False.
+    else if (newpassword != confirmpassword) {
+      toast.warn("\nPassword did not match: Please try again...");
+      return false;
+    }
+    // If same return True.
+    else {
+      let reqq = {
+        id: 1,
+        password: password,
+        newpassword: newpassword,
+      };
 
-    const submitform = async () => {
-
-      const formData = new FormData()
-            formData.append('id',1)
-            formData.append('first_name',name)
-            formData.append('email',email)
-            formData.append('phone',phone)
-            formData.append('address',address)
-            formData.append('pincode',postal)
-            formData.append('gender', gender)
-            formData.append('image',image)
-
-            
-     
-      let res = await axios
-        .post(URL + "/updateAdmin", formData)
-        .then(() => {
-          toast.success("Data Updated Successfully")
-          
+      await axios.post(URL + "/changepasswordadmin", reqq, {
+        Accept: "Application/json",
+        "Content-Type": "Application/json",
+      })
+        .then((res) => {
+          toast.success("Password changed Successfully");
         })
         .catch((err) => {
-          toast.error("error")
-          //console.log(err);
+          toast.error('Please Enter Correct Password')
         });
-        getsettingsdata()
-    };
-
-
-    const [password, setPassword] = useState("");
-    const [newpassword, setNewpassword] = useState("");
-    const [confirmpassword, setConfirmpassword] = useState("");
-
-    const ChangePassword = async () => {
-      if (password == "") {
-        toast.warn("Please Enter old Password");
-      } else if (newpassword == ""){
-         toast.warn("Please enter New Password");
-      }
-      // If confirm password not entered
-      else if (confirmpassword == ""){
-         toast.warn("Please enter confirm password");
-      }
-      // If Not same return False.
-      else if (newpassword != confirmpassword) {
-        toast.warn("\nPassword did not match: Please try again...");
-        return false;
-      }
-  
-      // If same return True.
-      else {
-        let reqq = {
-          id: 1,
-          password: password,
-          newpassword: newpassword,
-        };
-        
-        await axios.post(URL + "/changepasswordadmin", reqq, {
-          Accept: "Application/json",
-          "Content-Type": "Application/json",
-        })
-          .then((res) => {
-              toast.success("Password changed Successfully");
-          })
-          .catch((err) => {
-            //console.log(err.message);
-            toast.error('Please Enter Correct Password')
-          });
-      }
-  
-      // setPassword("");
-      // setNewpassword("");
-      // setConfirmpassword("");
-    };
-  
-
+    }
+    // setPassword("");
+    // setNewpassword("");
+    // setConfirmpassword("");
+  };
 
   //change photo
-  const uploadedImage = React.useRef(null);
-  const imageUploader = React.useRef(null);
-  const [image,setImage] = useState('')
-
   const handleImageUpload = e => {
     const [file] = e.target.files;
     setImage(e.target.files[0])
@@ -262,18 +243,17 @@ const Settings = () => {
                           <div className="user-photo-main-area">
                             <div className="user-img-area">
                               <img
-                              ref={uploadedImage}
-                                src = {
-                                  data.image === ''?
-                                  process.env.PUBLIC_URL +
-                                  "/assets/images/user-img.jpg" : `${URL}/uploads/${data.image}`
+                                ref={uploadedImage}
+                                src={
+                                  data.image === '' ?
+                                    process.env.PUBLIC_URL +
+                                    "/assets/images/user-img.jpg" : `${URL}/uploads/${data.image}`
                                 }
                                 alt="user img"
                               />
                             </div>
                             <div className="change-photo-btn-area">
                               {/* <a href="#" className="change-poto-btn">
-
                                 <i
                                   className="fa fa-camera"
                                   aria-hidden="true"
@@ -281,12 +261,11 @@ const Settings = () => {
                                 Edit
                               </a> */}
                               <label className="change-poto-btn">
-                                <input ref={imageUploader} onChange={handleImageUpload} type="file" style={{display:'none'}}></input>
+                                <input ref={imageUploader} onChange={handleImageUpload} type="file" style={{ display: 'none' }}></input>
                                 Edit
                               </label>
                             </div>
                           </div>
-                 
                         </div>
                       </div>
                       <div className="col-lg-7">
@@ -307,9 +286,8 @@ const Settings = () => {
                                   <input
                                     type="text"
                                     onError={nameError}
-                                    className={`form-control field ${
-                                      !nameError ? "is-valid" : "is-invalid"
-                                    }`}
+                                    className={`form-control field ${!nameError ? "is-valid" : "is-invalid"
+                                      }`}
                                     onChange={(event) => {
                                       setName(event.target.value);
                                       const isNameCorrect = nameRegex.test(
@@ -337,9 +315,8 @@ const Settings = () => {
                                   <input
                                     type="text"
                                     onError={emailError}
-                                    className={`form-control field ${
-                                      !emailError ? "is-valid" : "is-invalid"
-                                    } `}
+                                    className={`form-control field ${!emailError ? "is-valid" : "is-invalid"
+                                      } `}
                                     onChange={(event) => {
                                       setEmail(event.target.value);
                                       const isEmailCorrect = emailRegex.test(
@@ -367,9 +344,8 @@ const Settings = () => {
                                   <input
                                     type="text"
                                     onError={phoneError}
-                                    className={`form-control field ${
-                                      !phoneError ? "is-valid" : "is-invalid"
-                                    }`}
+                                    className={`form-control field ${!phoneError ? "is-valid" : "is-invalid"
+                                      }`}
                                     onChange={(event) => {
                                       setPhone(event.target.value);
                                       const isPhoneCorrect = phoneRegex.test(
@@ -377,7 +353,7 @@ const Settings = () => {
                                       );
                                       setPhoneError(
                                         event.target.value !== "" &&
-                                          !isPhoneCorrect,)
+                                        !isPhoneCorrect,)
                                     }}
                                     defaultValue={data.phone}
                                     name="holdername"
@@ -399,8 +375,6 @@ const Settings = () => {
                                   <div className="profile-input-box-area">
                                     <select
                                       className="form-control"
-
-
                                       onChange={(event) => {
                                         setGender(event.target.value);
                                       }}
@@ -421,9 +395,8 @@ const Settings = () => {
                                   <input
                                     type="text"
                                     onError={addressError}
-                                    className={`form-control field ${
-                                      !addressError ? "is-valid" : "is-invalid"
-                                    }`}
+                                    className={`form-control field ${!addressError ? "is-valid" : "is-invalid"
+                                      }`}
                                     defaultValue={data.address}
                                     onChange={(event) => {
                                       setAddress(event.target.value);
@@ -456,7 +429,6 @@ const Settings = () => {
                                       onChange={(e) => handlecountry(e)}
                                     >
                                       <option>--Choose Country--</option>
-
                                       {
                                         getcountrylist.map((e) => {
                                           return (
@@ -464,9 +436,6 @@ const Settings = () => {
                                           )
                                         })
                                       }
-
-
-
                                     </select>
                                   </div>
                                 </div>
@@ -480,7 +449,6 @@ const Settings = () => {
                                       name="cars"
                                       id="cars"
                                       onChange={(e) => handlestate(e)}
-
                                     >
                                       <option >Select State</option>
                                       {
@@ -490,8 +458,6 @@ const Settings = () => {
                                           )
                                         })
                                       }
-
-
                                     </select>
                                   </div>
                                 </div>
@@ -502,15 +468,11 @@ const Settings = () => {
                                   <div className="profile-input-box-area">
                                     <select
                                       className="form-control"
-
                                       name="cars"
                                       id="cars"
                                       onChange={(e) => setCity(e.target.value)}
-
-
                                     >
                                       <option value="">Select City</option>
-
                                       {
                                         getcitylist.map((e) => {
                                           return (
@@ -518,8 +480,6 @@ const Settings = () => {
                                           )
                                         })
                                       }
-
-
                                     </select>
                                   </div>
                                 </div>
@@ -530,9 +490,8 @@ const Settings = () => {
                                   <input
                                     type="text"
                                     onError={zipCodeError}
-                                    className={`form-control field ${
-                                      !zipCodeError ? "is-valid" : "is-invalid"
-                                    }`}
+                                    className={`form-control field ${!zipCodeError ? "is-valid" : "is-invalid"
+                                      }`}
                                     defaultValue={data.pincode}
                                     onChange={(event) => {
                                       setPostal(event.target.value);
@@ -541,7 +500,7 @@ const Settings = () => {
                                       );
                                       setZipCodeError(
                                         event.target.value != "" &&
-                                          !isZipCorrect,
+                                        !isZipCorrect,
                                       );
                                     }}
                                     name="holdername"
@@ -566,12 +525,12 @@ const Settings = () => {
                                   >
                                     Submit
                                   </a> */}
-                                   <button
+                                  <button
                                     type="button"
-                                    style={{backgroundColor:'#912c00',width:'90px',padding:'10px',color:'white', border:'2px solid white', borderRadius:'10px'}}
+                                    style={{ backgroundColor: '#912c00', width: '90px', padding: '10px', color: 'white', border: '2px solid white', borderRadius: '10px' }}
                                     disabled={!isEnabled}
                                     onClick={submitform}
-                                    // className="contact-form-submint-btn"
+                                  // className="contact-form-submint-btn"
                                   >
                                     Submit
                                   </button>
@@ -637,7 +596,6 @@ const Settings = () => {
                               onChange={(e) => setNewpassword(e.target.value)}
                               required="true"
                               value={newpassword}
-
                               className="form-control"
                               placeholder="Enter New Password"
                             />
@@ -660,9 +618,7 @@ const Settings = () => {
                               name="confirmpassword"
                               required="true"
                               value={confirmpassword}
-
                               onChange={(e) => setConfirmpassword(e.target.value)}
-
                               className="form-control"
                               placeholder="Enter Confirm Password"
                             />
@@ -674,7 +630,6 @@ const Settings = () => {
                       <a
                         href="javascript:void(0);"
                         onClick={ChangePassword}
-
                         className="submit-password-change-btn"
                       >
                         Submit
@@ -695,7 +650,4 @@ const Settings = () => {
 };
 
 export default Settings;
-
-
-
 //<a class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary" tabindex="0" role="button" aria-disabled="false" href="#/app/add-admin"><span class="MuiButton-label">Add Admin</span><span class="MuiTouchRipple-root"></span></a>

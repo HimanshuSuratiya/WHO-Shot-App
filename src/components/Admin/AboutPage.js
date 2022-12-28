@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { URL } from "../../url/url";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 const AboutPage = () => {
   const [heading, setHeading] = useState([]);
   const [description, setDescription] = useState([]);
@@ -13,11 +14,9 @@ const AboutPage = () => {
   const headingRegex = /^[#.0-9a-zA-Z\s,-]{0,50}$/;
   const [descriptionError, setDescriptionError] = useState("");
   const descriptionRegex = /^[#.0-9a-zA-Z\s,-]{0,50}$/;
-
   //formValidation
 
   const submit = (e) => {
-    console.log(heading, description);
     let data = { heading, description };
     fetch("http://localhost:8000/aboutUs", {
       method: "POST",
@@ -36,6 +35,7 @@ const AboutPage = () => {
         console.log(error);
       });
   };
+
   useEffect(() => {
     fetchAboutData();
   }, []);
@@ -44,9 +44,6 @@ const AboutPage = () => {
     await axios
       .get("http://localhost:8000/getAboutUs")
       .then((res) => {
-        console.log(res.data.message);
-        // console.log(res.data[0].heading);
-        // console.log(res.data[0].description);
         setHeading(res.data.data[0].heading);
         setDescription(res.data.data[0].description);
       })
@@ -86,9 +83,7 @@ const AboutPage = () => {
                   </div>
                   <div className="form-group">
                     <label>Description</label>
-                    {/* <textarea className="form-control" placeholder="Enter Description" value={description} onChange={(e)=>{
-                                            setDescription(e.target.value)
-                                        }}></textarea> */}
+                    {/* <textarea className="form-control" placeholder="Enter Description" value={description} onChange={(e)=>{setDescription(e.target.value) }}></textarea> */}
                     <CKEditor
                       editor={ClassicEditor}
                       data={description}
@@ -99,7 +94,6 @@ const AboutPage = () => {
                       onChange={(event, editor) => {
                         const data = editor.getData();
                         setDescription(data);
-
                         // console.log({ event, editor, data });
                       }}
                       onBlur={(event, editor) => {
@@ -124,8 +118,7 @@ const AboutPage = () => {
           </div>
         </div>
         <footer className="footer text-center">
-          {" "}
-          2022 © Admin Panel brought to you by{" "}
+          2022 © Admin Panel brought to you by
           <a href="https://https://www.webnmobappssolutions.com">
             webnmobappssolutions.com
           </a>

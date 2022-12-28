@@ -8,7 +8,6 @@ import {
 import { useTheme, makeStyles } from "@material-ui/styles";
 import classnames from "classnames";
 
-// styles
 var useStyles = makeStyles(theme => ({
   badge: {
     fontWeight: 600,
@@ -121,8 +120,6 @@ function Button({ children, color, className, ...props }) {
 
 export { Badge, Typography, Button };
 
-// ########################################################################
-
 function getColor(color, theme, brigtness = "main") {
   if (color && theme.palette[color] && theme.palette[color][brigtness]) {
     return theme.palette[color][brigtness];
@@ -144,7 +141,6 @@ function getFontWeight(style) {
 
 function getFontSize(size, variant = "", theme) {
   var multiplier;
-
   switch (size) {
     case "sm":
       multiplier = 0.8;
@@ -167,7 +163,6 @@ function getFontSize(size, variant = "", theme) {
     variant && theme.typography[variant]
       ? theme.typography[variant].fontSize
       : theme.typography.fontSize + "px";
-
   return `calc(${defaultSize} * ${multiplier})`;
 }
 

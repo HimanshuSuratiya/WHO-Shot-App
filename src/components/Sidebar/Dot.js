@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, useTheme } from "@material-ui/styles";
 import classnames from "classnames";
 
-// styles
 var useStyles = makeStyles(theme => ({
   dotBase: {
     width: 8,

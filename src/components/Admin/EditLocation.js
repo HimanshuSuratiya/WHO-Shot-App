@@ -12,9 +12,9 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { URL } from '../../url/url';
-import {useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -23,8 +23,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogActions-root': {
         padding: theme.spacing(2),
     },
-
-
 }));
 
 function BootstrapDialogTitle(props) {
@@ -56,65 +54,53 @@ BootstrapDialogTitle.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({sendId}) {
-    // console.log(sendId, 'send it id');
-    const [open, setOpen] = React.useState(false);
+export default function CustomizedDialogs({ sendId }) {
+    const [open, setOpen] = useState(false);
+    const [data, setData] = useState([])
+    const [locationValue, setLocationValue] = useState("")
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
 
-    
-    const [data,setData] = useState([])
-
     //Get Location By ID Api
-    const getLocationById = ()=>{
-        let req = {id:sendId}
-       
-        axios.post(URL + '/getLocationByID',req,{
-            Accept:'Application',
+    const getLocationById = () => {
+        let req = { id: sendId }
+        axios.post(URL + '/getLocationByID', req, {
+            Accept: 'Application',
             'Content-type': 'application/json'
-        }).then((res)=>{
+        }).then((res) => {
             setData(res.data.data[0])
-        }).catch(err=>console.log(err))
+        }).catch(err => console.log(err))
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getLocationById()
-    },[])
-
-
-   
-    
+    }, [])
     //Get Location By ID APi
 
-
     //update Location
-    const [locationValue,setLocationValue] = useState("")
-    
-    const updateLocation= async(res)=>{
+    const updateLocation = async (res) => {
         let request = {
-            id:sendId,
-            location:locationValue,
+            id: sendId,
+            location: locationValue,
         }
-        await axios.post(URL + '/updateLocation',request,{
+        await axios.post(URL + '/updateLocation', request, {
             Accept: 'Application',
             'Content-Type': 'Application/json'
-        }).then(()=>{
+        }).then(() => {
             toast.success('Location updated')
-        }).catch((err)=>{
+        }).catch((err) => {
             toast.error(err)
-
-    })
-    if(res){
-        setOpen(false)
+        })
+        if (res) {
+            setOpen(false)
+        }
     }
-    }
-
-
     //update Location
 
     return (
@@ -129,20 +115,17 @@ export default function CustomizedDialogs({sendId}) {
                     Edit Location
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
-                    <input  type="text" onChange={(e)=>setLocationValue(e.target.value)}  placeholder='Enter Location' defaultValue={data.location}/>
+                    <input type="text" onChange={(e) => setLocationValue(e.target.value)} placeholder='Enter Location' defaultValue={data.location} />
                 </DialogContent>
                 <DialogActions className=''>
                     <Button autoFocus onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button autoFocus onClick={(e)=>updateLocation(e)}>
+                    <Button autoFocus onClick={(e) => updateLocation(e)}>
                         Update
                     </Button>
-
                 </DialogActions>
             </BootstrapDialog>
         </div>
     );
 }
-
-

@@ -11,9 +11,7 @@ const top100Films = [
     { label: 'noida 22' },
     { label: 'noida 22' },
     { label: 'noida 22' },
-    {
-        label: 'noida 22'
-    },
+    { label: 'noida 22' },
     { label: 'noida 22' },
 ]
 
@@ -28,7 +26,6 @@ const CustomersParkingDetails = () => {
                         <div className="col-lg-12">
                             <div className="application-detail-heading-area " style={{ position: "relative", padding: "20px", top: "20px" }} >
                                 <h2>Manage Coustomers</h2>
-
                                 <Autocomplete
                                     disablePortal
                                     id="combo-box-demo"
@@ -37,7 +34,6 @@ const CustomersParkingDetails = () => {
                                     renderInput={(params) => <TextField {...params} label="Location" />}
                                 />
                             </div>
-
                             <div className="table-data-search-box" >
                                 <div className="search">
                                     <input type="text" className="searchTerm" placeholder="Search" />
@@ -55,18 +51,15 @@ const CustomersParkingDetails = () => {
                                                 <th>Parking Name</th>
                                                 <th>Parking Location</th>
                                                 <th>Visited</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             <tr >
                                                 <td>1</td>
                                                 <td>Snp</td>
                                                 <td>Noida 59 kirtiman Tower</td>
                                                 <td>444</td>
                                             </tr>
-
                                         </tbody>
                                     </table>
                                     <Pagination count={100} color="primary" />

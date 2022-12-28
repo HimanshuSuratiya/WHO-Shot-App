@@ -10,8 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-//import { Axios } from 'axios';
 import axios from 'axios';
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -19,11 +19,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogActions-root': {
         padding: theme.spacing(2),
     },
-
-
 }));
-
-
 
 function BootstrapDialogTitle(props) {
     const { children, onClose, ...other } = props;
@@ -56,28 +52,24 @@ BootstrapDialogTitle.propTypes = {
 
 export default function CustomizedDialogs() {
     const [open, setOpen] = React.useState(false);
+    const [address, setAddress] = useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
 
-
-
-    const [address, setAddress] = useState([]);
     const addlocation = () => {
-        axios.post("http://localhost:5000/addlocation",{
-            address:address
-
+        axios.post("http://localhost:5000/addlocation", {
+            address: address
         }, {
             Accept: "Application",
             "Content-Type": "Application/json",
         }).then((res) => {
-            console.log(res)
             alert('success')
-           
         }).catch((err) => {
             console.log(err)
         })
@@ -108,7 +100,6 @@ export default function CustomizedDialogs() {
                         onClick={addlocation}>
                         Ok
                     </Button>
-
                 </DialogActions>
             </BootstrapDialog>
         </div>

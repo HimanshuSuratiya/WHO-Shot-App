@@ -16,27 +16,22 @@ import {
   SettingsApplications,
 } from "@material-ui/icons";
 import classNames from "classnames";
-
-// styles
 import useStyles from "./styles";
 import Logo2 from "../../images/Logo2.png"
-
-// components
 import { Badge, Typography } from "../Wrappers";
 import Notification from "../Notification/Notification";
-
-// context
 import {
   useLayoutState,
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
 import { useUserDispatch, signOut } from "../../context/UserContext";
+
 const notifications = [
-  { 
-    id: 0, 
+  {
+    id: 0,
     color: "warning",
-     message: "Check out this awesome ticket" 
+    message: "Check out this awesome ticket"
   },
   {
     id: 1,
@@ -60,17 +55,14 @@ const notifications = [
 
 export default function Header(props) {
   var classes = useStyles();
-
-  // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
   var userDispatch = useUserDispatch();
-
-  // local
   var [notificationsMenu, setNotificationsMenu] = useState(null);
   var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -103,7 +95,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-         <img className={classes.logotypeImage} src={Logo2} alt="logo"  />
+          <img className={classes.logotypeImage} src={Logo2} alt="logo" />
         </Typography>
         <div></div>
         <div className={classes.grow} />
@@ -183,22 +175,19 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-            { JSON.parse(localStorage.getItem('superAdminName')) }
+              {JSON.parse(localStorage.getItem('superAdminName'))}
             </Typography>
-            
           </div>
           <a href="#/app/settings">
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          
-
-          >
-            <SettingsApplications  className={classes.profileMenuIcon} /> Settings
-          </MenuItem></a>
-   
+            <MenuItem
+              className={classNames(
+                classes.profileMenuItem,
+                classes.headerMenuItem,
+              )}
+            >
+              <SettingsApplications className={classes.profileMenuIcon} /> Settings
+            </MenuItem>
+          </a>
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

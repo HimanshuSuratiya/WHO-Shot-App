@@ -11,9 +11,9 @@ const CreatePrivacypolicy = () => {
   const [headingError, setHeadingError] = useState("");
   const headingRegex = /^[a-zA-Z .,?!\s]{50,200}$/
   const [descriptionError, setDescriptionError] = useState("");
-  const descriptionRegex = /^[a-zA-Z .,?!\s]{100,1000}$/ 
+  const descriptionRegex = /^[a-zA-Z .,?!\s]{100,1000}$/
+
   const submit = (e) => {
-    console.log(heading, description);
     let data = { heading, description };
     fetch("http://localhost:8000/privacy", {
       method: "POST",
@@ -25,7 +25,6 @@ const CreatePrivacypolicy = () => {
     })
       .then((result) => {
         result.json().then((data) => {
-          //console.log(data)
           toast.success("Privacy Policy Created Successfully");
         });
       })
@@ -37,6 +36,7 @@ const CreatePrivacypolicy = () => {
   useEffect(() => {
     getData1();
   }, []);
+
   const getData1 = async () => {
     await axios
       .get("http://localhost:8000/getPrivacy")
@@ -67,9 +67,8 @@ const CreatePrivacypolicy = () => {
                     <input
                       onError={headingError}
                       type="text"
-                      className={`form-control field ${
-                        !headingError ? "is-valid" : "is-invalid"
-                      }`}
+                      className={`form-control field ${!headingError ? "is-valid" : "is-invalid"
+                        }`}
                       name="holdername"
                       placeholder="Enter Heading"
                       autofocus=""
@@ -102,31 +101,25 @@ const CreatePrivacypolicy = () => {
                       }}
                     ></textarea> */}
                     <CKEditor
-                    
-                    editor={ClassicEditor}
-                    data={description}
-                    
-                    onReady={editor => {
-                      console.log('Editor is ready to use!', editor);
-                    }}
-                    // onChange={(e) => { setDescriptions(e.target.value) }}
-                    onChange={(event, editor) => {
-                      const data = editor.getData();
-                      setDescription(data);
-                      
-                      // console.log({ event, editor, data });
-                    }}
-                   
-                    onBlur={(event, editor) => {
-                      console.log('Blur.', editor);
-                    }}
-                    onFocus={(event, editor) => {
-                      console.log('Focus.', editor);
-                    }}
-                    
-                    
-                  />
-                     <div className="invalid-feedback">
+                      editor={ClassicEditor}
+                      data={description}
+                      onReady={editor => {
+                        console.log('Editor is ready to use!', editor);
+                      }}
+                      // onChange={(e) => { setDescriptions(e.target.value) }}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setDescription(data);
+                        // console.log({ event, editor, data });
+                      }}
+                      onBlur={(event, editor) => {
+                        console.log('Blur.', editor);
+                      }}
+                      onFocus={(event, editor) => {
+                        console.log('Focus.', editor);
+                      }}
+                    />
+                    <div className="invalid-feedback">
                       {descriptionError ? 'Description should be minimum length 50 and maximum length is 300 character!' : ''}
                     </div>
                   </div>
@@ -145,8 +138,7 @@ const CreatePrivacypolicy = () => {
           </div>
         </div>
         <footer className="footer text-center">
-          {" "}
-          2022 © Admin Panel brought to you by{" "}
+          2022 © Admin Panel brought to you by
           <a href="https://https://www.webnmobappssolutions.com">
             webnmobappssolutions.com
           </a>

@@ -11,19 +11,18 @@ import { useParams } from "react-router-dom";
 import { URL } from "../../url/url";
 import { toast } from "react-toastify";
 
-const ManageLocation = ({label}) => {
+const ManageLocation = ({ label }) => {
   const [dataName, setDataName] = useState([]);
   const [search, setSearch] = useState("");
+
   const getData = async () => {
     await axios
       .get(URL + "/alllocationlist")
       .then((res) => {
         setDataName(res.data.message);
-        console.log(res.data.message);
       })
       .catch((err) => {
         console.log(err);
-        //console.log("err")
       });
   };
 
@@ -37,11 +36,8 @@ const ManageLocation = ({label}) => {
 
   const [activeStatus, setActiveStatus] = useState(true);
   const [status, setStatus] = useState(0)
-
-  //pagination
   const [pageNumber, setPageNumber] = useState(0);
   const id = useParams();
-
   const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
   const pageCount = Math.ceil(dataName.length / usersPerPage);
@@ -59,9 +55,7 @@ const ManageLocation = ({label}) => {
     axios
       .post(URL + "/locationDelete", { id: th })
       .then((res) => {
-        // console.log(res);
         getData()
-       
       })
       .catch((err) => {
         console.log(err);
@@ -69,32 +63,26 @@ const ManageLocation = ({label}) => {
   };
 
   const handleremove = (e, th) => {
-    //console.log(th);
     const text = "Are you sure want to delete"
     if (window.confirm(text) == true) {
-        toast.success("Data deleted successfully");
-        locationDeleteStatus(th);
-        return true
-      } else {
-        toast.warn("You canceled!");
-        return false
-      }
-   
+      toast.success("Data deleted successfully");
+      locationDeleteStatus(th);
+      return true
+    } else {
+      toast.warn("You canceled!");
+      return false
+    }
   };
-
   //location Delete
 
   //Handle Status
-  const handleStatus = async(status, usersID) => {
-    // alert();
+  const handleStatus = async (status, usersID) => {
     var getStatus = "";
     if (status === 0) {
       getStatus = 1;
     } else {
       getStatus = 0;
     }
-
-    console.log(status+" , "+usersID);
     const request = {
       id: usersID,
       status: getStatus,
@@ -103,17 +91,12 @@ const ManageLocation = ({label}) => {
     await axios
       .post(URL + "/updateLocationStatus", request)
       .then((res) => {
-          getData()
+        getData()
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-
-
-
-
   //Handle Status
 
   return (
@@ -155,7 +138,7 @@ const ManageLocation = ({label}) => {
             </div>
           </div>
           <div className="manage-admins-main-area">
-            <table class="table" style={{textAlign: 'center'}}>
+            <table class="table" style={{ textAlign: 'center' }}>
               <thead>
                 <tr>
                   <th scope="col">Sr No.</th>
@@ -163,8 +146,7 @@ const ManageLocation = ({label}) => {
                   <th scope="col">Total Participants</th>
                   <th scope="col">Created Date</th>
                   <th scope="col">End Date</th>
-
-                           <th scope="col">Action</th>
+                  <th scope="col">Action</th>
                   <th scope="col">Active/Inactive</th>
                 </tr>
               </thead>
@@ -176,19 +158,18 @@ const ManageLocation = ({label}) => {
                   <td>25/Nov/2022</td>
                   <td>5/Dec/2022</td>
                   <td>   <Link
-                          to={`/app/managelocation`}
-                          className="mange-admins-dlt-btn"
-                        >
-                          View
-                          <DeleteForever
-                            onClick={() => {
-                              Abc("Manish");
-                            }}
-                            style={{ color: "#FF5C93" }}
-                          />
-                        </Link> </td>
+                    to={`/app/managelocation`}
+                    className="mange-admins-dlt-btn"
+                  >
+                    View
+                    <DeleteForever
+                      onClick={() => {
+                        Abc("Manish");
+                      }}
+                      style={{ color: "#FF5C93" }}
+                    />
+                  </Link> </td>
                   <td> yes/ no</td>
-
                 </tr>
                 {/* {dataName
                   .filter(
@@ -223,10 +204,9 @@ const ManageLocation = ({label}) => {
                         </Link>
                       </td>
                       <td> */}
-                      {/* <input type="checkbox" onClick={()=>handleStatus(item.status,item.id)} data-toggle="toggle" data-on="Enabled" data-off="Disabled"/> */}
-{/*                       
+                {/* <input type="checkbox" onClick={()=>handleStatus(item.status,item.id)} data-toggle="toggle" data-on="Enabled" data-off="Disabled"/> */}
+                {/*                       
                         <BootstrapSwitchButton
-                        
                           onlabel="Active"
                           checked={item.status == 0 ? true : false}
                           width={100}
@@ -236,12 +216,7 @@ const ManageLocation = ({label}) => {
                             handleStatus(item.status,item.id)
                             setStatus(checked)
                           }}
-                       
-                        
                         />
-                        
-                        
-        
                       </td>
                     </tr>
                   ))} */}
@@ -264,8 +239,7 @@ const ManageLocation = ({label}) => {
         </div>
       </div>
       <footer className="footer text-center">
-        {" "}
-        2022 ©Admin Panel brought to you by{" "}
+        2022 ©Admin Panel brought to you by
         <a href="https://https://www.webnmobappssolutions.com">
           webnmobappssolutions.com
         </a>

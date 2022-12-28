@@ -6,46 +6,41 @@ import { toast } from "react-toastify";
 
 const ContactDetails = () => {
   const history = useHistory();
-
   var [phone, setPhonenumber] = useState([]);
   const [email, setEmail] = useState([]);
   const [address, setAddress] = useState([]);
   const [data, getData] = useState([]);
-var phone;
-  const createContactDetails = (e) => {
+  var phone;
 
-    let data= {phone,email,address}
-    fetch("http://localhost:8000/contact",{
-      method:"POST",
-      headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-      },body:JSON.stringify(data)
-        
-    }).then((result)=>{
-      result.json().then((data)=>{
+  const createContactDetails = (e) => {
+    let data = { phone, email, address }
+    fetch("http://localhost:8000/contact", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify(data)
+    }).then((result) => {
+      result.json().then((data) => {
         toast.success("Contact Updated Successfully")
       })
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log(error)
     })
   }
+
   useEffect(() => {
     getData1();
-    
   }, []);
 
-  const getData1 = async()=>{
-    await axios.get("http://localhost:8000/getContact").then((res)=>{
-      //console.log(res.data[0].email);
+  const getData1 = async () => {
+    await axios.get("http://localhost:8000/getContact").then((res) => {
       setEmail(res.data.data[0].email)
       setAddress(res.data.data[0].address)
       setPhonenumber(res.data.data[0].phone)
-
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log(err)
     })
-    
   }
 
   // Form validation 
@@ -55,9 +50,7 @@ var phone;
   const emailRegex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
   const [addressError, setAddressError] = useState("")
   const addressRegex = /^[#.0-9a-zA-Z\s,-]{0,50}$/;
-
   const isEnabled = !phoneError && !emailError && !addressError && phone != "" && email != "" && address != ""
-
   // Form validation
 
   return (
@@ -80,9 +73,8 @@ var phone;
                   <input
                     type="text"
                     onError={phoneError}
-                    className={`form-control field ${
-                      !phoneError ? "is-valid" : "is-invalid"
-                    }`}
+                    className={`form-control field ${!phoneError ? "is-valid" : "is-invalid"
+                      }`}
                     name="phonenumber"
                     placeholder="Enter Phone Number"
                     autofocus=""
@@ -104,9 +96,8 @@ var phone;
                   <input
                     type="text"
                     onError={emailError}
-                    className={`form-control field ${
-                      !emailError ? "is-valid" : "is-invalid"
-                    }`}
+                    className={`form-control field ${!emailError ? "is-valid" : "is-invalid"
+                      }`}
                     name="email"
                     placeholder="Enter Email ID"
                     autofocus=""
@@ -128,9 +119,8 @@ var phone;
                   <input
                     type="text"
                     onError={addressError}
-                    className={`form-control field ${
-                      !addressError ? "is-valid" : "is-invalid"
-                    }`}
+                    className={`form-control field ${!addressError ? "is-valid" : "is-invalid"
+                      }`}
                     name="address"
                     placeholder="Enter Address"
                     autofocus=""
@@ -164,14 +154,14 @@ var phone;
                     style={{
                       backgroundColor: "#912c00",
                       padding: "10px",
-                      width:'100px',
+                      width: '100px',
                       color: "white",
                       border: "2px solid white",
                       borderRadius: "10px",
                     }}
                     disabled={!isEnabled}
                     onClick={createContactDetails}
-                    // className="contact-form-submint-btn"
+                  // className="contact-form-submint-btn"
                   >
                     Submit
                   </button>
@@ -182,8 +172,7 @@ var phone;
         </div>
       </div>
       <footer className="footer text-center">
-        {" "}
-        2022 © Admin Panel brought to you by{" "}
+        2022 © Admin Panel brought to you by
         <a href="https://https://www.webnmobappssolutions.com">
           webnmobappssolutions.com
         </a>

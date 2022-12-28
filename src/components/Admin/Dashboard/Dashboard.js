@@ -78,13 +78,11 @@ const Dashboard = () => {
                                             style={{ display: "inline-block", width: '67px', height: "30px", verticalAlign: 'top' }}></canvas>
                                         </div>
                                     </li>
-                                    <li className="ms-auto"><span className="counter text-info">911</span>
-                                    </li>
+                                    <li className="ms-auto"><span className="counter text-info">911</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
                     <div className="row justify-content-center">
                         <div className="col-lg-3 col-md-12">
                             <div className="white-box analytics-info">
@@ -134,13 +132,11 @@ const Dashboard = () => {
                                             style={{ display: "inline-block", width: '67px', height: "30px", verticalAlign: 'top' }}></canvas>
                                         </div>
                                     </li>
-                                    <li className="ms-auto"><span className="counter text-info">911</span>
-                                    </li>
+                                    <li className="ms-auto"><span className="counter text-info">911</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
                     <div className="row">
                         <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div className="white-box">
@@ -416,8 +412,8 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <footer className="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
+                <footer className="footer text-center"> 2021 © Ample Admin brought to you by
+                    <a href="https://www.wrappixel.com/">wrappixel.com</a>
                 </footer>
             </div>
         </>

@@ -15,6 +15,4 @@ export default makeStyles(theme => ({
   container: {
     padding: theme.spacing(3)
   }
-
-  
 }));
