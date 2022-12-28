@@ -5,11 +5,11 @@ import Pagination from '@mui/material/Pagination'
 import { Link } from "react-router-dom";
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import ReactPaginate from 'react-paginate'
-import { URL } from "../../../url/url";
+import { URL } from "../../url/url";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-const ManageMerchants = () => {
+const DetailsOfGroup = () => {
   const [status, setStatus] = useState(0)
   const [custmerData, setCustomerData] = useState([])
   const [pageNumber, setPageNumber] = useState(0);
@@ -85,12 +85,12 @@ const ManageMerchants = () => {
   //customer Delete
 
   const data = [
-    { status: 0, id: '1', activityName: 'Himanshu Suratiya', profile: 'its_himanshu_0007', noOfActivities: '125', noOfParticipation: '5', noOfTransaction: '2' },
-    { status: 1, id: '2', activityName: 'Vishal Singh', profile: 'vishal09862', noOfActivities: '254', noOfParticipation: '12', noOfTransaction: '8' },
-    { status: 1, id: '3', activityName: 'Sourabh Shukla', profile: '123_Sourabh', noOfActivities: '45', noOfParticipation: '17', noOfTransaction: '4' },
-    { status: 0, id: '4', activityName: 'Shivam Suratiya', profile: 'Shivam_007', noOfActivities: '27', noOfParticipation: '3', noOfTransaction: '2' },
-    { status: 1, id: '5', activityName: 'Pintu Kashyap', profile: 'Pintu_@#45', noOfActivities: '256', noOfParticipation: '7', noOfTransaction: '0' },
-    { status: 0, id: '6', activityName: 'Virender Kumar', profile: 'Kumar123&', noOfActivities: '0', noOfParticipation: '4', noOfTransaction: '7' },
+    { status: 0, id: '1', groupName: 'Group-1', noOfShots: '125', noOfPlayer: '5', won: '5', loss: '2', noOfTransaction: '2', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
+    { status: 1, id: '2', groupName: 'Group-2', noOfShots: '254', noOfPlayer: '12', won: '7', loss: '5', noOfTransaction: '8', createdOnDate: '04/12/2022', endDate: '14/12/2022' },
+    { status: 1, id: '3', groupName: 'Group-3', noOfShots: '45', noOfPlayer: '17', won: '3', loss: '2', noOfTransaction: '4', createdOnDate: '02/11/2022', endDate: '10/11/2022' },
+    { status: 0, id: '4', groupName: 'Group-4', noOfShots: '27', noOfPlayer: '3', won: '15', loss: '0', noOfTransaction: '2', createdOnDate: '02/10/2022', endDate: '04/10/2022' },
+    { status: 1, id: '5', groupName: 'Group-5', noOfShots: '256', noOfPlayer: '7', won: '0', loss: '0', noOfTransaction: '0', createdOnDate: '02/11/2021', endDate: '02/11/2022' },
+    { status: 0, id: '6', groupName: 'Group-6', noOfShots: '0', noOfPlayer: '4', won: '6', loss: '2', noOfTransaction: '7', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
   ]
 
   return (
@@ -102,7 +102,7 @@ const ManageMerchants = () => {
               <div className="row">
                 <div className="col-md-7">
                   <div className="heading-top">
-                    <h2>Statistics</h2>
+                    <h2>Details of Group</h2>
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -132,10 +132,11 @@ const ManageMerchants = () => {
                     <thead>
                       <tr>
                         <th>Sr. No.</th>
-                        <th>Activity Name</th>
-                        <th>No. of Participation</th>
-                        <th>No. Of Activites</th>
-                        <th>No. of Transaction</th>
+                        <th>Group Name</th>
+                        <th>No. Of Player</th>
+                        <th>Created On</th>
+                        <th>Won</th>
+                        <th>Loss</th>
                         <th>View Details</th>
                         <th>Action</th>
                         <th>Active/Inactive</th>
@@ -146,10 +147,11 @@ const ManageMerchants = () => {
                         return (
                           <tr>
                             <td>{Item.id}</td>
-                            <td>{Item.activityName}</td>
-                            <td>{Item.noOfParticipation}</td>
-                            <td>{Item.noOfActivities}</td>
-                            <td>{Item.noOfTransaction}</td>
+                            <td>{Item.groupName}</td>
+                            <td>{Item.noOfPlayer}</td>
+                            <td>{Item.createdOnDate}</td>
+                            <td>{Item.won}</td>
+                            <td>{Item.loss}</td>
                             <td><span>View</span></td>
                             <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
                             <td>
@@ -254,4 +256,4 @@ const ManageMerchants = () => {
   );
 };
 
-export default ManageMerchants;
+export default DetailsOfGroup;

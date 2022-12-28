@@ -7,8 +7,8 @@ import useStyles from "./styles";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Dashboard from "../Admin/Dashboard/Dashboard";
-import ManageAdmin from "../Admin/Manage Admin/ManageAdmin";
-import ManageMerchants from "../Admin/Manage Merchants/ManageMerchants";
+import AllHunters from "../Admin/Manage Admin/AllHunters";
+import Statistics from "../Admin/Manage Merchants/Statistics";
 import NotificationDetails from "../Admin/notificatonDetails";
 import EditParking from "../Admin/Manage Admin/EditParking";
 import Maps from "../../pages/maps";
@@ -22,13 +22,13 @@ import { useLayoutState } from "../../context/LayoutContext";
 import CustomersDetails from '../Admin/CustomersDetails'
 import ContactDetails from "../Admin/Contactus/ContactDetails";
 import AllNotification from "../Admin/Notifications/AllNotification";
-import Bookings from "../Admin/Bookings";
+import BasicReports from "../Admin/BasicReports";
 import Payments from "../Admin/Payments";
-import ManageLocation from "../Admin/ManageLocation";
+import ManageHunts from "../Admin/ManageHunts";
 import CustomersParkingDetails from "../Admin/CustomersParkingDetails";
 import AboutPage from "../Admin/AboutPage";
 import '../../vishal.css'
-import DetailsGroup from "../Admin/DetailsGroup";
+import DetailsOfGroup from "../Admin/DetailsOfGroup";
 import ManageGroups from "../Admin/ManageGroups";
 
 function Layout(props) {
@@ -48,8 +48,8 @@ function Layout(props) {
           <div className={classes.fakeToolbar} />
           <Switch>
             <Route path="/app/dashboard" component={Dashboard} />
-            <Route path="/app/admin/" component={ManageAdmin} />
-            <Route path="/app/merchants" component={ManageMerchants} />
+            <Route path="/app/all-hunters/" component={AllHunters} />
+            <Route path="/app/statistics" component={Statistics} />
             <Route path='/app/editparking/:id' component={EditParking} />
             <Route path="/app/customersdetails/:id" component={CustomersDetails} />
             <Route path="/app/customersparkingdetails" component={CustomersParkingDetails} />
@@ -57,10 +57,10 @@ function Layout(props) {
             <Route exact path="/app/ui" render={() => <Redirect to="/app/ui/icons" />} />
             <Route path="/app/ui/maps" component={Maps} />
             <Route path="/app/ui/charts" component={Charts} />
-            <Route path="/app/managelocation/" component={ManageLocation} />
-            <Route path="/app/detailsgroup/" component={DetailsGroup} />
-            <Route path="/app/managegroups/" component={ManageGroups} />
-            <Route path="/app/bookings/" component={Bookings} />
+            <Route path="/app/manage-hunts/" component={ManageHunts} />
+            <Route path="/app/details-of-group/" component={DetailsOfGroup} />
+            <Route path="/app/manage-groups/" component={ManageGroups} />
+            <Route path="/app/basic-reports/" component={BasicReports} />
             <Route path="/app/payment/" component={Payments} />
             <Route path="/app/settings/" component={Settings} />
             <Route path="/app/notifications" component={AllNotification} />

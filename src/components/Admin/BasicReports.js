@@ -6,7 +6,7 @@ import { URL } from "../../url/url";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import axios from 'axios';
 
-const Bookings = () => {
+const BasicReports = () => {
     const [age, setAge] = React.useState('');
     const [dataName, setDataName] = useState([])
     const [pageNumber, setPageNumber] = useState(0);
@@ -184,4 +184,4 @@ const Bookings = () => {
     )
 }
 
-export default Bookings;
+export default BasicReports;

@@ -1,39 +1,63 @@
 import React, { useState, useEffect } from "react";
-import BootstrapSwitchButton from 'bootstrap-switch-button-react'
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import Pagination from '@mui/material/Pagination'
-import { Link } from "react-router-dom";
 import DeleteForever from '@material-ui/icons/DeleteForever';
-import ReactPaginate from 'react-paginate'
-import { URL } from "../../url/url";
-import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ReactPaginate from "react-paginate";
+import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+import axios from 'axios';
+import { URL } from "../../../url/url";
 import { toast } from 'react-toastify';
 
-const DetailsGroup = () => {
-  const [status, setStatus] = useState(0)
-  const [custmerData, setCustomerData] = useState([])
+const AllHunters = () => {
+  // const id = useParams()
+  const [datas, setDatas] = useState([])
+  const [search, setSearch] = useState("")
+  const [status, setStatus] = useState(0);
   const [pageNumber, setPageNumber] = useState(0);
-  const [search, setSearch] = useState("");
   const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
-  const pageCount = Math.ceil(custmerData.length / usersPerPage);
+  const pageCount = Math.ceil(datas.length / usersPerPage);
 
-  const GetAllCoustomer = () => {
-    axios.get(URL + '/getAllCustomers', {
-      Accept: 'Application',
-      'Content-type': 'Application/json'
-    }).then((res) => {
-      setCustomerData(res.data.message)
-    }).catch(err => console.log('err'))
+  const getData = async () => {
+    await axios.get(URL + '/getparking').then(res => {
+      setDatas(res.data.message)
+    }).catch(err => {
+      console.log("err")
+    })
   }
 
   useEffect(() => {
-    GetAllCoustomer()
+    getData();
   }, [])
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  //Parking Delete
+  const parkingDeleteStatus = (th) => {
+    axios
+      .post(URL + "/deleteParking", { id: th })
+      .then((res) => {
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleremove = (e, th) => {
+    const text = "Are you sure want to delete"
+    if (window.confirm(text) == true) {
+      toast.success("Data deleted successfully");
+      parkingDeleteStatus(th);
+      return true
+    } else {
+      toast.warn("You canceled!");
+      return false
+    }
+  };
+  //Parking Delete
 
   //Handle Status
   const handleStatus = async (status, usersID) => {
@@ -49,48 +73,22 @@ const DetailsGroup = () => {
     };
 
     await axios
-      .post(URL + "/updateStatus", request)
+      .post(URL + "/parkingStatus", request)
       .then((res) => {
-        GetAllCoustomer()
+        getData();
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  //Handle Status
-
-  //customer Delete
-  const customerDeleteStatus = (th) => {
-    axios
-      .post(URL + "/customerDelete", { id: th })
-      .then((res) => {
-        GetAllCoustomer()
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleremove = (e, th) => {
-    const text = "Are you sure want to delete"
-    if (window.confirm(text) == true) {
-      toast.success("Data deleted successfully");
-      customerDeleteStatus(th);
-      return true
-    } else {
-      toast.warn("You canceled!");
-      return false
-    }
-  };
-  //customer Delete
 
   const data = [
-    { status: 0, id: '1', groupName: 'Group-1', noOfShots: '125', noOfPlayer: '5', won: '5', loss: '2', noOfTransaction: '2', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
-    { status: 1, id: '2', groupName: 'Group-2', noOfShots: '254', noOfPlayer: '12', won: '7', loss: '5', noOfTransaction: '8', createdOnDate: '04/12/2022', endDate: '14/12/2022' },
-    { status: 1, id: '3', groupName: 'Group-3', noOfShots: '45', noOfPlayer: '17', won: '3', loss: '2', noOfTransaction: '4', createdOnDate: '02/11/2022', endDate: '10/11/2022' },
-    { status: 0, id: '4', groupName: 'Group-4', noOfShots: '27', noOfPlayer: '3', won: '15', loss: '0', noOfTransaction: '2', createdOnDate: '02/10/2022', endDate: '04/10/2022' },
-    { status: 1, id: '5', groupName: 'Group-5', noOfShots: '256', noOfPlayer: '7', won: '0', loss: '0', noOfTransaction: '0', createdOnDate: '02/11/2021', endDate: '02/11/2022' },
-    { status: 0, id: '6', groupName: 'Group-6', noOfShots: '0', noOfPlayer: '4', won: '6', loss: '2', noOfTransaction: '7', createdOnDate: '02/11/2022', endDate: '04/11/2022' },
+    { id: '1', name: 'Himanshu Suratiya', profile: 'its_himanshu_0007', joinDate: '02/11/2022', recentActiveDate: '04/11/2022', totalHunts: '125' },
+    { id: '2', name: 'Vishal Singh', profile: 'vishal09862', joinDate: '04/12/2022', recentActiveDate: '14/12/2022', totalHunts: '254' },
+    { id: '3', name: 'Sourabh Shukla', profile: '123_Sourabh', joinDate: '02/11/2022', recentActiveDate: '10/11/2022', totalHunts: '45' },
+    { id: '4', name: 'Shivam Suratiya', profile: 'Shivam_007', joinDate: '02/10/2022', recentActiveDate: '04/10/2022', totalHunts: '27' },
+    { id: '5', name: 'Pintu Kashyap', profile: 'Pintu_@#45', joinDate: '02/11/2021', recentActiveDate: '02/11/2022', totalHunts: '256' },
+    { id: '6', name: 'Virender Kumar', profile: 'Kumar123&', joinDate: '02/11/2022', recentActiveDate: '04/11/2022', totalHunts: '0' },
   ]
 
   return (
@@ -102,7 +100,7 @@ const DetailsGroup = () => {
               <div className="row">
                 <div className="col-md-7">
                   <div className="heading-top">
-                    <h2>Details of Group</h2>
+                    <h2>All Hunters</h2>
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -121,8 +119,8 @@ const DetailsGroup = () => {
                   </div>
                 </div>
                 <div className="col-md-2">
-                  <button href="#/app/add-admin" class="head-button">
-                    Export
+                  <button class="head-button">
+                    <Link to={`/app/add-admin`}> Add Users</Link>
                   </button>
                 </div>
               </div>
@@ -131,15 +129,13 @@ const DetailsGroup = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>Sr. No.</th>
-                        <th>Group Name</th>
-                        <th>No. Of Player</th>
-                        <th>Created On</th>
-                        <th>Won</th>
-                        <th>Loss</th>
-                        <th>View Details</th>
+                        <th>S.No.</th>
+                        <th>Profile </th>
+                        <th> Name </th>
+                        <th>Total Hunts</th>
+                        <th>Joined Date</th>
+                        <th>Recent Active(Date)</th>
                         <th>Action</th>
-                        <th>Active/Inactive</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -147,34 +143,20 @@ const DetailsGroup = () => {
                         return (
                           <tr>
                             <td>{Item.id}</td>
-                            <td>{Item.groupName}</td>
-                            <td>{Item.noOfPlayer}</td>
-                            <td>{Item.createdOnDate}</td>
-                            <td>{Item.won}</td>
-                            <td>{Item.loss}</td>
-                            <td><span>View</span></td>
+                            <td>{Item.profile}</td>
+                            <td>{Item.name}</td>
+                            <td>{Item.totalHunts}</td>
+                            <td>{Item.joinDate}</td>
+                            <td>{Item.recentActiveDate}</td>
                             <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
-                            <td>
-                              <BootstrapSwitchButton
-                                onlabel="Active"
-                                checked={Item.status == 0 ? true : false}
-                                width={100}
-                                offlabel="Inactive"
-                                onstyle="success"
-                                onChange={(checked) => {
-                                  handleStatus(Item.status, Item.id);
-                                  setStatus(checked);
-                                }}
-                              />
-                            </td>
                           </tr>
                         )
                       })}
-                      {/* {custmerData
+                      {/* {datas
                         .filter(
                           (row) =>
                             !search.length ||
-                            row.first_name
+                            row.parking_name
                               .toString()
                               .toLowerCase()
                               .includes(search.toString().toLowerCase()),
@@ -182,23 +164,27 @@ const DetailsGroup = () => {
                         .slice(pagesVisited, pagesVisited + usersPerPage)
                         .map((item, i) => (
                           <tr>
-                            <td>{i + 1}</td>
-                            <td>{item.first_name}</td>
-                            <td>{item.email}</td>
-                            <td>{item.phone}</td>
-                            <td className="parking-number">
-                              <Link to={`/app/customersparkingdetails`}>
-                                133
-                              </Link>
+                            <td>{i + pagesVisited + 1}</td>
+                            <td>
+                              <div className="user-icon-detail-area">
+                                <div className="company-user-icon-area">
+                                  {item.parking_name}
+                                </div>
+                              </div>
                             </td>
-                            <td className="parking-number">
-                              <Link to={`/app/customersdetails/${item.id}`}>
-                                <VisibilityIcon />
-                              </Link>
+                            <td>{item.location}</td>
+                            <td>
+                              <VisibilityIcon />
                             </td>
-                            <td className="parking-number">
+                            <td>
                               <Link
-                                to={`/app/merchants`}
+                                to={`/app/editparking/${item.id}`}
+                                className="mange-admins-edit-btn"
+                              >
+                                <i className="fas fa-edit"></i>
+                              </Link>
+                              <Link
+                                to={`/app/admin`}
                                 datalist={item.id}
                                 onClick={(e) => handleremove(e, item.id)}
                                 className="mange-admins-dlt-btn"
@@ -224,9 +210,7 @@ const DetailsGroup = () => {
                     </tbody>
                   </table>
                   <div
-                    style={{
-                      display: custmerData.length > 5 ? "block" : "none",
-                    }}
+                    style={{ display: datas.length > 5 ? "block" : "none" }}
                   >
                     <ReactPaginate
                       previousLabel={"Previous"}
@@ -256,4 +240,12 @@ const DetailsGroup = () => {
   );
 };
 
-export default DetailsGroup;
+export default AllHunters;
+// {data.map((item, i) => (
+//     <tr key={i}>
+//         <td>{item.userId}</td>
+//         <td>{item.id}</td>
+//         <td>{item.title}</td>
+//         <td>{item.body}</td>
+//     </tr>
+// ))}

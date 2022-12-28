@@ -1,63 +1,39 @@
 import React, { useState, useEffect } from "react";
-import DeleteForever from '@material-ui/icons/DeleteForever';
-import { Link, useParams } from "react-router-dom";
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ReactPaginate from "react-paginate";
-import BootstrapSwitchButton from 'bootstrap-switch-button-react';
-import axios from 'axios';
+import Pagination from '@mui/material/Pagination'
+import { Link } from "react-router-dom";
+import DeleteForever from '@material-ui/icons/DeleteForever';
+import ReactPaginate from 'react-paginate'
 import { URL } from "../../../url/url";
+import axios from "axios";
 import { toast } from 'react-toastify';
 
-const ManageAdmin = () => {
-  // const id = useParams()
-  const [datas, setDatas] = useState([])
-  const [search, setSearch] = useState("")
-  const [status, setStatus] = useState(0);
+const Statistics = () => {
+  const [status, setStatus] = useState(0)
+  const [custmerData, setCustomerData] = useState([])
   const [pageNumber, setPageNumber] = useState(0);
+  const [search, setSearch] = useState("");
   const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
-  const pageCount = Math.ceil(datas.length / usersPerPage);
+  const pageCount = Math.ceil(custmerData.length / usersPerPage);
 
-  const getData = async () => {
-    await axios.get(URL + '/getparking').then(res => {
-      setDatas(res.data.message)
-    }).catch(err => {
-      console.log("err")
-    })
+  const GetAllCoustomer = () => {
+    axios.get(URL + '/getAllCustomers', {
+      Accept: 'Application',
+      'Content-type': 'Application/json'
+    }).then((res) => {
+      setCustomerData(res.data.message)
+    }).catch(err => console.log('err'))
   }
 
   useEffect(() => {
-    getData();
+    GetAllCoustomer()
   }, [])
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
-
-  //Parking Delete
-  const parkingDeleteStatus = (th) => {
-    axios
-      .post(URL + "/deleteParking", { id: th })
-      .then((res) => {
-        getData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleremove = (e, th) => {
-    const text = "Are you sure want to delete"
-    if (window.confirm(text) == true) {
-      toast.success("Data deleted successfully");
-      parkingDeleteStatus(th);
-      return true
-    } else {
-      toast.warn("You canceled!");
-      return false
-    }
-  };
-  //Parking Delete
 
   //Handle Status
   const handleStatus = async (status, usersID) => {
@@ -73,22 +49,48 @@ const ManageAdmin = () => {
     };
 
     await axios
-      .post(URL + "/parkingStatus", request)
+      .post(URL + "/updateStatus", request)
       .then((res) => {
-        getData();
+        GetAllCoustomer()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //Handle Status
+
+  //customer Delete
+  const customerDeleteStatus = (th) => {
+    axios
+      .post(URL + "/customerDelete", { id: th })
+      .then((res) => {
+        GetAllCoustomer()
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  const handleremove = (e, th) => {
+    const text = "Are you sure want to delete"
+    if (window.confirm(text) == true) {
+      toast.success("Data deleted successfully");
+      customerDeleteStatus(th);
+      return true
+    } else {
+      toast.warn("You canceled!");
+      return false
+    }
+  };
+  //customer Delete
+
   const data = [
-    { id: '1', name: 'Himanshu Suratiya', profile: 'its_himanshu_0007', joinDate: '02/11/2022', recentActiveDate: '04/11/2022', totalHunts: '125' },
-    { id: '2', name: 'Vishal Singh', profile: 'vishal09862', joinDate: '04/12/2022', recentActiveDate: '14/12/2022', totalHunts: '254' },
-    { id: '3', name: 'Sourabh Shukla', profile: '123_Sourabh', joinDate: '02/11/2022', recentActiveDate: '10/11/2022', totalHunts: '45' },
-    { id: '4', name: 'Shivam Suratiya', profile: 'Shivam_007', joinDate: '02/10/2022', recentActiveDate: '04/10/2022', totalHunts: '27' },
-    { id: '5', name: 'Pintu Kashyap', profile: 'Pintu_@#45', joinDate: '02/11/2021', recentActiveDate: '02/11/2022', totalHunts: '256' },
-    { id: '6', name: 'Virender Kumar', profile: 'Kumar123&', joinDate: '02/11/2022', recentActiveDate: '04/11/2022', totalHunts: '0' },
+    { status: 0, id: '1', activityName: 'Himanshu Suratiya', profile: 'its_himanshu_0007', noOfActivities: '125', noOfParticipation: '5', noOfTransaction: '2' },
+    { status: 1, id: '2', activityName: 'Vishal Singh', profile: 'vishal09862', noOfActivities: '254', noOfParticipation: '12', noOfTransaction: '8' },
+    { status: 1, id: '3', activityName: 'Sourabh Shukla', profile: '123_Sourabh', noOfActivities: '45', noOfParticipation: '17', noOfTransaction: '4' },
+    { status: 0, id: '4', activityName: 'Shivam Suratiya', profile: 'Shivam_007', noOfActivities: '27', noOfParticipation: '3', noOfTransaction: '2' },
+    { status: 1, id: '5', activityName: 'Pintu Kashyap', profile: 'Pintu_@#45', noOfActivities: '256', noOfParticipation: '7', noOfTransaction: '0' },
+    { status: 0, id: '6', activityName: 'Virender Kumar', profile: 'Kumar123&', noOfActivities: '0', noOfParticipation: '4', noOfTransaction: '7' },
   ]
 
   return (
@@ -100,7 +102,7 @@ const ManageAdmin = () => {
               <div className="row">
                 <div className="col-md-7">
                   <div className="heading-top">
-                    <h2>All Hunters</h2>
+                    <h2>Statistics</h2>
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -119,8 +121,8 @@ const ManageAdmin = () => {
                   </div>
                 </div>
                 <div className="col-md-2">
-                  <button class="head-button">
-                    <Link to={`/app/add-admin`}> Add Users</Link>
+                  <button href="#/app/add-admin" class="head-button">
+                    Export
                   </button>
                 </div>
               </div>
@@ -129,13 +131,14 @@ const ManageAdmin = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>S.No.</th>
-                        <th>Profile </th>
-                        <th> Name </th>
-                        <th>Total Hunts</th>
-                        <th>Joined Date</th>
-                        <th>Recent Active(Date)</th>
+                        <th>Sr. No.</th>
+                        <th>Activity Name</th>
+                        <th>No. of Participation</th>
+                        <th>No. Of Activites</th>
+                        <th>No. of Transaction</th>
+                        <th>View Details</th>
                         <th>Action</th>
+                        <th>Active/Inactive</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -143,20 +146,33 @@ const ManageAdmin = () => {
                         return (
                           <tr>
                             <td>{Item.id}</td>
-                            <td>{Item.profile}</td>
-                            <td>{Item.name}</td>
-                            <td>{Item.totalHunts}</td>
-                            <td>{Item.joinDate}</td>
-                            <td>{Item.recentActiveDate}</td>
+                            <td>{Item.activityName}</td>
+                            <td>{Item.noOfParticipation}</td>
+                            <td>{Item.noOfActivities}</td>
+                            <td>{Item.noOfTransaction}</td>
+                            <td><span>View</span></td>
                             <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                            <td>
+                              <BootstrapSwitchButton
+                                onlabel="Active"
+                                checked={Item.status == 0 ? true : false}
+                                width={100}
+                                offlabel="Inactive"
+                                onstyle="success"
+                                onChange={(checked) => {
+                                  handleStatus(Item.status, Item.id);
+                                  setStatus(checked);
+                                }}
+                              />
+                            </td>
                           </tr>
                         )
                       })}
-                      {/* {datas
+                      {/* {custmerData
                         .filter(
                           (row) =>
                             !search.length ||
-                            row.parking_name
+                            row.first_name
                               .toString()
                               .toLowerCase()
                               .includes(search.toString().toLowerCase()),
@@ -164,27 +180,23 @@ const ManageAdmin = () => {
                         .slice(pagesVisited, pagesVisited + usersPerPage)
                         .map((item, i) => (
                           <tr>
-                            <td>{i + pagesVisited + 1}</td>
-                            <td>
-                              <div className="user-icon-detail-area">
-                                <div className="company-user-icon-area">
-                                  {item.parking_name}
-                                </div>
-                              </div>
-                            </td>
-                            <td>{item.location}</td>
-                            <td>
-                              <VisibilityIcon />
-                            </td>
-                            <td>
-                              <Link
-                                to={`/app/editparking/${item.id}`}
-                                className="mange-admins-edit-btn"
-                              >
-                                <i className="fas fa-edit"></i>
+                            <td>{i + 1}</td>
+                            <td>{item.first_name}</td>
+                            <td>{item.email}</td>
+                            <td>{item.phone}</td>
+                            <td className="parking-number">
+                              <Link to={`/app/customersparkingdetails`}>
+                                133
                               </Link>
+                            </td>
+                            <td className="parking-number">
+                              <Link to={`/app/customersdetails/${item.id}`}>
+                                <VisibilityIcon />
+                              </Link>
+                            </td>
+                            <td className="parking-number">
                               <Link
-                                to={`/app/admin`}
+                                to={`/app/merchants`}
                                 datalist={item.id}
                                 onClick={(e) => handleremove(e, item.id)}
                                 className="mange-admins-dlt-btn"
@@ -210,7 +222,9 @@ const ManageAdmin = () => {
                     </tbody>
                   </table>
                   <div
-                    style={{ display: datas.length > 5 ? "block" : "none" }}
+                    style={{
+                      display: custmerData.length > 5 ? "block" : "none",
+                    }}
                   >
                     <ReactPaginate
                       previousLabel={"Previous"}
@@ -240,12 +254,4 @@ const ManageAdmin = () => {
   );
 };
 
-export default ManageAdmin;
-// {data.map((item, i) => (
-//     <tr key={i}>
-//         <td>{item.userId}</td>
-//         <td>{item.id}</td>
-//         <td>{item.title}</td>
-//         <td>{item.body}</td>
-//     </tr>
-// ))}
+export default Statistics;

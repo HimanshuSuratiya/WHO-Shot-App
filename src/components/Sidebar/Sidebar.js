@@ -33,37 +33,37 @@ const structure = [
   {
     id: 783,
     label: "Manage Hunts ",
-    link: "/app/managelocation",
+    link: "/app/manage-hunts",
     icon: <Diversity3Icon />,
   },
   {
     id: 5,
     label: "All Hunters ",
-    link: "/app/admin",
+    link: "/app/all-hunters",
     icon: <PeopleIcon />,
   },
   {
     id: 6,
     label: "Statistics",
-    link: "/app/merchants",
+    link: "/app/statistics",
     icon: <EqualizerIcon />,
   },
   {
     id: 29,
     label: "Basic Reports",
-    link: "/app/bookings",
+    link: "/app/basic-reports",
     icon: <ReportIcon />
   },
   {
     id: 31,
     label: "Detail Of Groups ",
-    link: "/app/detailsgroup",
+    link: "/app/details-of-group",
     icon: < DetailsIcon />
   },
   {
     id: 32,
     label: "Manage Groups ",
-    link: "/app/managegroups",
+    link: "/app/manage-groups",
     icon: <GroupsIcon />
   },
   {
@@ -126,7 +126,6 @@ const structure = [
     link: "/app/about-us",
     icon: <ArticleIcon />,
   },
-
 ];
 
 function Sidebar({ location }) {

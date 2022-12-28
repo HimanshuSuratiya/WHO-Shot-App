@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { URL } from "../../url/url";
 import { toast } from "react-toastify";
 
-const ManageLocation = ({ label }) => {
+const ManageHunts = ({ label }) => {
   const [dataName, setDataName] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -272,4 +272,4 @@ const ManageLocation = ({ label }) => {
   );
 };
 
-export default ManageLocation;
+export default ManageHunts;
