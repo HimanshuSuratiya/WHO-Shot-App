@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch, Redirect, withRouter, } from "react-router-dom";
 import classnames from "classnames";
 import { Box } from '@material-ui/core'
-import '../../vishal.css'
 import useStyles from "./styles";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
@@ -27,7 +26,6 @@ import Payments from "../Admin/Payments";
 import ManageHunts from "../ManageHunts/ManageHunts";
 import CustomersParkingDetails from "../Admin/CustomersParkingDetails";
 import AboutPage from "../About/AboutPage";
-import '../../vishal.css'
 import DetailsOfGroup from "../DetailsofGroup/DetailsOfGroup";
 import ManageGroups from "../ManageGroup/ManageGroups";
 

@@ -6,7 +6,6 @@ import Themes from "./themes";
 import App from "./components/App";
 import { LayoutProvider } from "./context/LayoutContext";
 import { UserProvider } from "./context/UserContext";
-import './vishal.css'
 
 ReactDOM.render(
   <LayoutProvider>
