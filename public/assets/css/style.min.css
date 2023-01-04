@@ -13770,14 +13770,18 @@ html[dir=ltr] body .p-l-0 {
 
 .white-box {
   background: #fff;
+  margin-bottom: 30px;
   padding: 25px;
-  margin-bottom: 30px
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgb(17 17 26 / 10%), 0 8px 24px rgb(17 17 26 / 10%), 0 16px 48px rgb(17 17 26 / 10%);
 }
 
 .white-box .box-title {
-  font-weight: 700;
   line-height: 30px;
-  font-size: 18px
+  margin-bottom: 0px;
+  color: #912c00;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .list-inline {
@@ -14727,7 +14731,9 @@ select.form-select.form-control-line {
 
 .page-breadcrumb .page-title {
   margin-bottom: 0px;
-  font-weight: 700
+  color: #912c00;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .page-breadcrumb .breadcrumb {
@@ -19224,6 +19230,7 @@ select.form-select {
 .heading-top h2 {
   font-size: 20px;
   font-weight: 500;
+  color: #912c00;
 }
 
 .table-data-search-box-manage input {
@@ -19338,3 +19345,8 @@ select.form-select {
 }
 
 /* Himanshu Additional Css */
+
+
+/* Change Design By Himanshu */
+
+/* Change Design By Himanshu */
