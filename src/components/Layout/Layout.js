@@ -28,6 +28,7 @@ import CustomersParkingDetails from "../Admin/CustomersParkingDetails";
 import AboutPage from "../About/AboutPage";
 import DetailsOfGroup from "../DetailsofGroup/DetailsOfGroup";
 import ManageGroups from "../ManageGroup/ManageGroups";
+import HuntDetail from "../HuntDetail/HuntDetail";
 
 function Layout(props) {
   var classes = useStyles();
@@ -56,6 +57,7 @@ function Layout(props) {
             <Route path="/app/ui/maps" component={Maps} />
             <Route path="/app/ui/charts" component={Charts} />
             <Route path="/app/manage-hunts/" component={ManageHunts} />
+            <Route path="/app/hunt-details" component={HuntDetail} />
             <Route path="/app/details-of-group/" component={DetailsOfGroup} />
             <Route path="/app/manage-groups/" component={ManageGroups} />
             <Route path="/app/basic-reports/" component={BasicReports} />

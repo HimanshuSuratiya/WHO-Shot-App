@@ -19357,4 +19357,20 @@ select.form-select {
   padding: 0px 14px;
 }
 
+
+/* Hunt Detail */
+span.hunt-detail-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #912c00;
+}
+
+.hunt-detail-information {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Hunt Detail */
+
 /* Change Design By Himanshu */

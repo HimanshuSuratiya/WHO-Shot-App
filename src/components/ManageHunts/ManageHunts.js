@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import BootstrapDialog from "../BootstrapDialog/BootstrapDialog";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import "reactjs-popup/dist/index.css";
-import EditLocation from "../EditLocation/EditLocation";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { URL } from "../../url/url";
+import InfoIcon from '@mui/icons-material/Info';
 import { toast } from "react-toastify";
+import EditIcon from '@mui/icons-material/Edit';
 
 const ManageHunts = ({ label }) => {
   const [dataName, setDataName] = useState([]);
@@ -161,14 +162,10 @@ const ManageHunts = ({ label }) => {
                       <td>{Item.createDate}</td>
                       <td>{Item.endDate}</td>
                       <td>
-                        <Link to={`/app/managelocation`} className="mange-admins-dlt-btn" >
-                          <span>View</span>
-                          <DeleteForever
-                            onClick={() => {
-                              Abc("Manish");
-                            }}
-                            style={{ color: "#FF5C93" }}
-                          />
+                        <DeleteForever style={{ color: "#912c00" }} />
+                        <EditIcon style={{ color: "#912c00" }} />
+                        <Link to={`/app/hunt-details`} className="mange-admins-dlt-btn" >
+                          <InfoIcon style={{ color: "#912c00" }} />
                         </Link>
                       </td>
                       <td>
