@@ -79,21 +79,19 @@ const AllNotification = () => {
   return (
     <div className="page-wrapper" >
       <div className="container-fluid">
-        <div className="add-location">
+        <div className="add-location notification-page">
           <div className="row">
-            <div className="col-md-6">
+            <div className="py-2 px-0 d-flex justify-content-between align-items-center">
               <div className="heading-top" >
                 <h2>Notification List</h2>
               </div>
-            </div>
-            <div className="col-md-3">
-            </div>
-            <div className="col-md-3 add-notification">
-              <NotificationList />
+              <div className="col-md-3 add-notification">
+                <NotificationList />
+              </div>
             </div>
             <div className="manage-admins-main-area">
               <div className="manage-admins-table-area">
-                <table className="table">
+                <table className="table table-column-center">
                   <thead>
                     <tr>
                       <th>Sr. no.</th>

@@ -58,11 +58,11 @@ const AboutPage = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
-              <div className="application-detail-heading-area">
+              <div className="application-detail-heading-area heading-top">
                 <h2>Create About Page</h2>
               </div>
             </div>
-            <div className="col-lg-12">
+            <div className="d-flex align-items-center justify-content-center">
               <div className="contact-notification-detail-main-area">
                 <form className="send-notifications-form-area">
                   <div className="form-group">
@@ -106,7 +106,7 @@ const AboutPage = () => {
                   </div>
                   <div className="contact-form-submint-btn-area">
                     <button
-                      className="contact-form-submint-btn"
+                      className="setting-submit-btn"
                       onClick={submit}
                     >
                       Submit

@@ -125,7 +125,7 @@ const Statistics = () => {
               </div>
               <div className="manage-admins-main-area">
                 <div className="manage-admins-table-area">
-                  <table className="table">
+                  <table className="table table-column-center">
                     <thead>
                       <tr>
                         <th>Sr. No.</th>

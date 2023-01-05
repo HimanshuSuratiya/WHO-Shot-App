@@ -75,25 +75,27 @@ const BasicReports = () => {
                 <div className="add-location">
                     <div className="booking-wrapper">
                         <div className="row">
-                            <div className="col-md-9">
-                                <div className="heading-top" >
-                                    <h2>Basic Reports</h2>
+                            <div className="py-2 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div className="heading-top" >
+                                        <h2>Basic Reports</h2>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-md-3">
-                                <div className="table-data-search-box-manage">
-                                    <div className="search-bar" >
-                                        <input type="text" onChange={(e) => setSearch(e.target.value)} className="searchTerm-input" placeholder="Search" />
-                                        <button type="submit" className="searchButtons">
-                                            <i className="fa fa-search" aria-hidden="true"></i>
-                                        </button>
+                                <div>
+                                    <div className="table-data-search-box-manage">
+                                        <div className="search-bar" >
+                                            <input type="text" onChange={(e) => setSearch(e.target.value)} className="searchTerm-input" placeholder="Search" />
+                                            <button type="submit" className="searchButtons">
+                                                <i className="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="manage-admins-main-area">
-                        <table class="table">
+                        <table class="table table-column-center">
                             <thead>
                                 <tr>
                                     <th scope="col">Sr No.</th>

@@ -53,11 +53,11 @@ const CreateTermsandservices = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
-              <div className="application-detail-heading-area">
+              <div className="application-detail-heading-area heading-top">
                 <h2>Create Terms & Conditions</h2>
               </div>
             </div>
-            <div className="col-lg-12">
+            <div className="d-flex align-items-center justify-content-center">
               <div className="contact-notification-detail-main-area">
                 <form className="send-notifications-form-area">
                   <div className="form-group">
@@ -87,7 +87,13 @@ const CreateTermsandservices = () => {
                     />
                   </div>
                   <div className="contact-form-submint-btn-area">
-                    <a href="#/app/create-terms-and-services" onClick={createTerms} className="contact-form-submint-btn">Submit</a>
+                    <button
+                      type="button"
+                      className="setting-submit-btn"
+                      onClick={createTerms}
+                    >
+                      Submit
+                    </button>
                   </div>
                 </form>
               </div>

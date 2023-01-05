@@ -152,7 +152,7 @@ const Settings = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
-              <div className="heading-top">
+              <div className="heading-top py-2">
                 <h2>Settings</h2>
               </div>
             </div>
@@ -520,7 +520,7 @@ const Settings = () => {
                                   </a> */}
                                   <button
                                     type="button"
-                                    style={{ backgroundColor: '#912c00', width: '90px', padding: '10px', color: 'white', border: '2px solid white', borderRadius: '10px' }}
+                                    className="setting-submit-btn"
                                     disabled={!isEnabled}
                                     onClick={submitform}
                                   // className="contact-form-submint-btn"
