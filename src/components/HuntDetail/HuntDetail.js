@@ -143,7 +143,7 @@ const HuntDetail = () => {
                                 <th scope="col">No of Missed</th>
                                 <th scope="col">No of Woomed</th>
                                 <th scope="col">Other</th>
-                                <th scope="col">Active Remove</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>

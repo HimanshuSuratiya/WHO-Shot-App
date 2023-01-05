@@ -7,6 +7,9 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import axios from 'axios';
 import { URL } from "../../url/url";
 import { toast } from 'react-toastify';
+import InfoIcon from '@mui/icons-material/Info';
+import EditIcon from '@mui/icons-material/Edit';
+import Avatar from '@mui/material/Avatar';
 
 const AllHunters = () => {
   // const id = useParams()
@@ -130,7 +133,6 @@ const AllHunters = () => {
                         <th>Profile </th>
                         <th> Name </th>
                         <th>Total Hunts</th>
-                        <th>Joined Date</th>
                         <th>Recent Active(Date)</th>
                         <th>Action</th>
                       </tr>
@@ -140,12 +142,19 @@ const AllHunters = () => {
                         return (
                           <tr>
                             <td>{Item.id}</td>
-                            <td>{Item.profile}</td>
+                            <td>
+                              <div className="d-flex align-items-center justify-content-center">
+                                <Avatar sx={{ width: 45, height: 45 }} alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
+                              </div>
+                            </td>
                             <td>{Item.name}</td>
                             <td>{Item.totalHunts}</td>
-                            <td>{Item.joinDate}</td>
                             <td>{Item.recentActiveDate}</td>
-                            <td> <DeleteForever style={{ color: "#912c00" }} /> </td>
+                            <td>
+                              <DeleteForever style={{ color: "#912c00" }} />
+                              <EditIcon style={{ color: "#912c00" }} />
+                              <InfoIcon style={{ color: "#912c00" }} />
+                            </td>
                           </tr>
                         )
                       })}
